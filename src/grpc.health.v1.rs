@@ -4,6 +4,7 @@
 /// @@
 /// @@   Request message for HealthCheck
 /// @@
+#[::pyo3::pyclass(get_all, set_all)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct HealthCheckRequest {
     #[prost(string, tag = "1")]
@@ -14,6 +15,7 @@ pub struct HealthCheckRequest {
 /// @@
 /// @@   Response message for HealthCheck
 /// @@
+#[::pyo3::pyclass(get_all, set_all)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct HealthCheckResponse {
     #[prost(enumeration = "health_check_response::ServingStatus", tag = "1")]
@@ -26,6 +28,7 @@ pub mod health_check_response {
     /// @@
     /// @@   Statuses supported by GRPC's health check.
     /// @@
+    #[::pyo3::pyclass(get_all, set_all)]
     #[derive(
         Clone,
         Copy,

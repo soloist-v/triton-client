@@ -28,7 +28,6 @@ pyo3 = { version = "0.26", features = ["extension-module"] }
 numpy = { version = "0.26" }
 serde_json = "1"
 prost-types = "0.14"
-triton-client-macros = { path = "triton-client-macros" }
 
 [build-dependencies]
 walkdir = "2"

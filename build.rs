@@ -41,6 +41,10 @@ fn main() -> Result<()> {
     tonic_prost_build::configure()
         .build_server(true)
         .out_dir("src")
+        // 为所有类型添加 pyclass 属性
+        .type_attribute(".", "#[::pyo3::pyclass(get_all, set_all)]")
+        // 为所有类型添加我们的宏（实现类型转换 traits）
+        // .type_attribute(".", "#[derive(::triton_client_macros::TritonPyClass)]")
         .compile_protos(&protobuf_paths, &[pb_dir])
         .context("unable to compile Protocol Buffers for the Triton client")?;
 

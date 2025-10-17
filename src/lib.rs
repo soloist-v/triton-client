@@ -3,79 +3,68 @@
 pub mod client;
 mod error;
 mod inference;
-mod py_impl;
 mod py_types;
+mod utils;
+
 pub use client::Client;
 pub use error::{Error, Result};
-pub use inference::*;
 
 use pyo3::prelude::*;
 use tokio::sync::OnceCell;
 
 static TOKIO_RT: OnceCell<tokio::runtime::Runtime> = OnceCell::const_new();
-fn init_log(level: String) {
-    fn detailed_format(
-        w: &mut dyn std::io::Write,
-        now: &mut flexi_logger::DeferredNow,
-        record: &log::Record,
-    ) -> Result<(), std::io::Error> {
-        let ts = now.format("%Y-%m-%d %H:%M:%S%.3f");
-        let level = match record.level() {
-            log::Level::Error => "ERROR",
-            log::Level::Warn => "WARNING",
-            log::Level::Info => "INFO",
-            log::Level::Debug => "DEBUG",
-            log::Level::Trace => "TRACE",
-        };
-        let module = record
-            .module_path()
-            .unwrap_or("<unnamed>")
-            .replace("::", ".");
-        write!(
-            w,
-            "{} | {:<8} | {}:{} - {}",
-            ts,
-            level,
-            module,
-            record.line().unwrap_or(0),
-            record.args()
-        )
-    }
-    flexi_logger::Logger::try_with_str(level)
-        .unwrap()
-        .format(detailed_format)
-        .log_to_stdout()
-        .start()
-        .unwrap();
-}
 
 #[pymodule(gil_used = false)]
 fn triton_client(m: &Bound<'_, PyModule>) -> PyResult<()> {
-    init_log(std::env::var("LOG_LEVEL").unwrap_or("INFO".to_string()));
+    utils::init_log(std::env::var("LOG_LEVEL").unwrap_or("INFO".to_string()));
     let rt = tokio::runtime::Runtime::new()?;
     TOKIO_RT.set(rt).expect("async runtime already initialized");
-    
     // Add client class
     m.add_class::<Client>()?;
-    
     // Add request/response types
-    m.add_class::<py_types::ModelReadyRequest>()?;
-    m.add_class::<py_types::ModelMetadataRequest>()?;
-    m.add_class::<py_types::ModelConfigRequest>()?;
-    m.add_class::<py_types::ModelStatisticsRequest>()?;
-    m.add_class::<py_types::RepositoryIndexRequest>()?;
-    m.add_class::<py_types::RepositoryModelLoadRequest>()?;
-    m.add_class::<py_types::RepositoryModelUnloadRequest>()?;
-    m.add_class::<py_types::SystemSharedMemoryStatusRequest>()?;
-    m.add_class::<py_types::SystemSharedMemoryRegisterRequest>()?;
-    m.add_class::<py_types::SystemSharedMemoryUnregisterRequest>()?;
-    m.add_class::<py_types::CudaSharedMemoryStatusRequest>()?;
-    m.add_class::<py_types::CudaSharedMemoryRegisterRequest>()?;
-    m.add_class::<py_types::CudaSharedMemoryUnregisterRequest>()?;
-    m.add_class::<py_types::TraceSettingRequest>()?;
-    m.add_class::<py_types::InferInput>()?;
-    m.add_class::<py_types::InferRequestedOutputTensor>()?;
-    m.add_class::<py_types::ModelInferRequest>()?;
-    
+    m.add_class::<inference::ServerLiveResponse>()?;
+    m.add_class::<inference::ServerReadyResponse>()?;
+    m.add_class::<inference::ModelReadyRequest>()?;
+    m.add_class::<inference::ModelReadyResponse>()?;
+    m.add_class::<inference::ServerMetadataResponse>()?;
+    m.add_class::<inference::ModelMetadataRequest>()?;
+    m.add_class::<inference::ModelMetadataResponse>()?;
+    m.add_class::<inference::ModelInferRequest>()?;
+    m.add_class::<inference::ModelInferResponse>()?;
+    m.add_class::<inference::ModelConfigRequest>()?;
+    m.add_class::<inference::ModelConfigResponse>()?;
+    m.add_class::<inference::ModelStatisticsRequest>()?;
+    m.add_class::<inference::ModelStatisticsResponse>()?;
+    m.add_class::<inference::RepositoryIndexRequest>()?;
+    m.add_class::<inference::RepositoryIndexResponse>()?;
+    m.add_class::<inference::RepositoryModelLoadRequest>()?;
+    m.add_class::<inference::RepositoryModelLoadResponse>()?;
+    m.add_class::<inference::RepositoryModelUnloadRequest>()?;
+    m.add_class::<inference::RepositoryModelUnloadResponse>()?;
+    m.add_class::<inference::SystemSharedMemoryStatusRequest>()?;
+    m.add_class::<inference::SystemSharedMemoryStatusResponse>()?;
+    m.add_class::<inference::SystemSharedMemoryRegisterRequest>()?;
+    m.add_class::<inference::SystemSharedMemoryRegisterResponse>()?;
+    m.add_class::<inference::SystemSharedMemoryUnregisterRequest>()?;
+    m.add_class::<inference::SystemSharedMemoryUnregisterResponse>()?;
+    m.add_class::<inference::CudaSharedMemoryStatusRequest>()?;
+    m.add_class::<inference::CudaSharedMemoryStatusResponse>()?;
+    m.add_class::<inference::CudaSharedMemoryRegisterRequest>()?;
+    m.add_class::<inference::CudaSharedMemoryRegisterResponse>()?;
+    m.add_class::<inference::CudaSharedMemoryUnregisterRequest>()?;
+    m.add_class::<inference::CudaSharedMemoryUnregisterResponse>()?;
+    m.add_class::<inference::TraceSettingRequest>()?;
+    m.add_class::<inference::TraceSettingResponse>()?;
+    // child types
+    m.add_class::<inference::system_shared_memory_status_response::RegionStatus>()?;
+    m.add_class::<inference::ModelRepositoryParameter>()?;
+    m.add_class::<inference::model_repository_parameter::ParameterChoice>()?;
+    m.add_class::<inference::model_metadata_response::TensorMetadata>()?;
+    m.add_class::<inference::InferParameter>()?;
+    m.add_class::<inference::infer_parameter::ParameterChoice>()?;
+    m.add_class::<inference::model_infer_request::InferInputTensor>()?;
+    m.add_class::<inference::InferTensorContents>()?;
+    m.add_class::<inference::ModelConfig>()?;
+    m.add_class::<inference::model_infer_response::InferOutputTensor>()?;
     Ok(())
 }

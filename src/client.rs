@@ -1,7 +1,5 @@
-use std::convert::{TryFrom, TryInto};
-
 use crate::error::Error;
-use http::uri::InvalidUri;
+use anyhow::Context;
 use tonic::metadata::{AsciiMetadataValue, MetadataValue};
 use tonic::service::Interceptor;
 use tonic::transport::channel::ClientTlsConfig;
@@ -24,7 +22,6 @@ impl Interceptor for AuthInterceptor {
                 .metadata_mut()
                 .insert("authorization", token.clone());
         }
-
         Ok(request)
     }
 }
@@ -51,158 +48,284 @@ pub struct Client {
     pub inner: GrpcInferenceServiceClient<InterceptedService<Channel, AuthInterceptor>>,
 }
 
-macro_rules! wrap_grpc_method {
-    ($doc:literal, $name:ident, $req_type:ty, $resp_type:ty) => {
-        #[doc=$doc]
-        #[inline(always)]
-        pub async fn $name(&self, req: $req_type) -> Result<$resp_type, Error> {
-            let response = self.inner.clone().$name(tonic::Request::new(req)).await?;
-            Ok(response.into_inner())
-        }
-    };
-}
-
-macro_rules! wrap_grpc_method_no_args {
-    ($doc:literal, $name:ident, $req_type:ty, $resp_type:ty) => {
-        #[doc=$doc]
-        #[inline(always)]
-        pub async fn $name(&self) -> Result<$resp_type, Error> {
-            let req: $req_type = Default::default();
-            let response = self.inner.clone().$name(tonic::Request::new(req)).await?;
-            Ok(response.into_inner())
-        }
-    };
-}
-
+#[pyo3::pymethods]
 impl Client {
-    /// Create a new triton client for the given url.
-    pub async fn new(
-        url: impl TryInto<http::Uri, Error = InvalidUri>,
-        access_token: Option<String>,
-    ) -> Result<Self, Error> {
-        let mut channel = Channel::builder(url.try_into()?);
-
-        if access_token.is_some() {
-            channel = channel.tls_config(ClientTlsConfig::new())?;
-        }
-
-        let channel = channel.connect().await?;
-
-        let client = GrpcInferenceServiceClient::with_interceptor(
-            channel,
-            AuthInterceptor::create(access_token.as_deref())?,
-        );
-
+    #[new]
+    pub fn new(url: &str, access_token: Option<String>) -> Result<Self, Error> {
+        let url = url.parse::<http::Uri>()?;
+        let client = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async {
+                let mut channel = Channel::builder(url);
+                if access_token.is_some() {
+                    channel = channel.tls_config(ClientTlsConfig::new())?;
+                }
+                let channel = channel.connect().await?;
+                let client = GrpcInferenceServiceClient::with_interceptor(
+                    channel,
+                    AuthInterceptor::create(access_token.as_deref())?,
+                );
+                Ok::<_, Error>(client)
+            })?;
         Ok(Client { inner: client })
     }
 
-    wrap_grpc_method_no_args!(
-        "Check liveness of the inference server.",
-        server_live,
-        inference::ServerLiveRequest,
-        inference::ServerLiveResponse
-    );
+    #[doc = "Check liveness of the inference server."]
+    #[inline(always)]
+    pub fn server_live(&self) -> Result<inference::ServerLiveResponse, Error> {
+        let req: inference::ServerLiveRequest = Default::default();
+        let mut inner = self.inner.clone();
+        let response = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async { inner.server_live(tonic::Request::new(req)).await })?;
+        Ok(response.into_inner())
+    }
 
-    wrap_grpc_method_no_args!(
-        "Check readiness of the inference server.",
-        server_ready,
-        inference::ServerReadyRequest,
-        inference::ServerReadyResponse
-    );
-    wrap_grpc_method!(
-        "Check readiness of a model in the inference server.",
-        model_ready,
-        inference::ModelReadyRequest,
-        inference::ModelReadyResponse
-    );
-    wrap_grpc_method_no_args!(
-        "Get server metadata.",
-        server_metadata,
-        inference::ServerMetadataRequest,
-        inference::ServerMetadataResponse
-    );
-    wrap_grpc_method!(
-        "Get model metadata.",
-        model_metadata,
-        inference::ModelMetadataRequest,
-        inference::ModelMetadataResponse
-    );
-    wrap_grpc_method!(
-        "Perform inference using a specific model.",
-        model_infer,
-        inference::ModelInferRequest,
-        inference::ModelInferResponse
-    );
-    wrap_grpc_method!(
-        "Get model configuration.",
-        model_config,
-        inference::ModelConfigRequest,
-        inference::ModelConfigResponse
-    );
-    wrap_grpc_method!(
-        "Get the cumulative inference statistics for a model.",
-        model_statistics,
-        inference::ModelStatisticsRequest,
-        inference::ModelStatisticsResponse
-    );
-    wrap_grpc_method!(
-        "Get the index of model repository contents.",
-        repository_index,
-        inference::RepositoryIndexRequest,
-        inference::RepositoryIndexResponse
-    );
-    wrap_grpc_method!(
-        "Load or reload a model from a repository.",
-        repository_model_load,
-        inference::RepositoryModelLoadRequest,
-        inference::RepositoryModelLoadResponse
-    );
-    wrap_grpc_method!(
-        "Unload a model.",
-        repository_model_unload,
-        inference::RepositoryModelUnloadRequest,
-        inference::RepositoryModelUnloadResponse
-    );
-    wrap_grpc_method!(
-        "Get the status of all registered system-shared-memory regions.",
-        system_shared_memory_status,
-        inference::SystemSharedMemoryStatusRequest,
-        inference::SystemSharedMemoryStatusResponse
-    );
-    wrap_grpc_method!(
-        "Register a system-shared-memory region.",
-        system_shared_memory_register,
-        inference::SystemSharedMemoryRegisterRequest,
-        inference::SystemSharedMemoryRegisterResponse
-    );
-    wrap_grpc_method!(
-        "Unregister a system-shared-memory region.",
-        system_shared_memory_unregister,
-        inference::SystemSharedMemoryUnregisterRequest,
-        inference::SystemSharedMemoryUnregisterResponse
-    );
-    wrap_grpc_method!(
-        "Get the status of all registered CUDA-shared-memory regions.",
-        cuda_shared_memory_status,
-        inference::CudaSharedMemoryStatusRequest,
-        inference::CudaSharedMemoryStatusResponse
-    );
-    wrap_grpc_method!(
-        "Register a CUDA-shared-memory region.",
-        cuda_shared_memory_register,
-        inference::CudaSharedMemoryRegisterRequest,
-        inference::CudaSharedMemoryRegisterResponse
-    );
-    wrap_grpc_method!(
-        "Unregister a CUDA-shared-memory region.",
-        cuda_shared_memory_unregister,
-        inference::CudaSharedMemoryUnregisterRequest,
-        inference::CudaSharedMemoryUnregisterResponse
-    );
-    wrap_grpc_method!(
-        "Update and get the trace setting of the Triton server.",
-        trace_setting,
-        inference::TraceSettingRequest,
-        inference::TraceSettingResponse
-    );
+    #[doc = "Check readiness of the inference server."]
+    #[inline(always)]
+    pub fn server_ready(&self) -> Result<inference::ServerReadyResponse, Error> {
+        let req: inference::ServerReadyRequest = Default::default();
+        let mut inner = self.inner.clone();
+        let response = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async { inner.server_ready(tonic::Request::new(req)).await })?;
+        Ok(response.into_inner())
+    }
+    #[doc = "Check readiness of a model in the inference server."]
+    #[inline(always)]
+    pub fn model_ready(
+        &self,
+        req: inference::ModelReadyRequest,
+    ) -> Result<inference::ModelReadyResponse, Error> {
+        let mut inner = self.inner.clone();
+        let response = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async { inner.model_ready(tonic::Request::new(req)).await })?;
+        Ok(response.into_inner())
+    }
+    #[doc = "Get server metadata."]
+    #[inline(always)]
+    pub fn server_metadata(&self) -> Result<inference::ServerMetadataResponse, Error> {
+        let req: inference::ServerMetadataRequest = Default::default();
+        let mut inner = self.inner.clone();
+        let response = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async { inner.server_metadata(tonic::Request::new(req)).await })?;
+        Ok(response.into_inner())
+    }
+    #[doc = "Get model metadata."]
+    #[inline(always)]
+    pub fn model_metadata(
+        &self,
+        req: inference::ModelMetadataRequest,
+    ) -> Result<inference::ModelMetadataResponse, Error> {
+        let mut inner = self.inner.clone();
+        let response = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async { inner.model_metadata(tonic::Request::new(req)).await })?;
+        Ok(response.into_inner())
+    }
+    #[doc = "Perform inference using a specific model."]
+    #[inline(always)]
+    pub fn model_infer(
+        &self,
+        req: inference::ModelInferRequest,
+    ) -> Result<inference::ModelInferResponse, Error> {
+        let mut inner = self.inner.clone();
+        let response = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async { inner.model_infer(tonic::Request::new(req)).await })?;
+        Ok(response.into_inner())
+    }
+    #[doc = "Get model configuration."]
+    #[inline(always)]
+    pub fn model_config(
+        &self,
+        req: inference::ModelConfigRequest,
+    ) -> Result<inference::ModelConfigResponse, Error> {
+        let mut inner = self.inner.clone();
+        let response = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async { inner.model_config(tonic::Request::new(req)).await })?;
+        Ok(response.into_inner())
+    }
+    #[doc = "Get the cumulative inference statistics for a model."]
+    #[inline(always)]
+    pub fn model_statistics(
+        &self,
+        req: inference::ModelStatisticsRequest,
+    ) -> Result<inference::ModelStatisticsResponse, Error> {
+        let mut inner = self.inner.clone();
+        let response = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async { inner.model_statistics(tonic::Request::new(req)).await })?;
+        Ok(response.into_inner())
+    }
+    #[doc = "Get the index of model repository contents."]
+    #[inline(always)]
+    pub fn repository_index(
+        &self,
+        req: inference::RepositoryIndexRequest,
+    ) -> Result<inference::RepositoryIndexResponse, Error> {
+        let mut inner = self.inner.clone();
+        let response = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async { inner.repository_index(tonic::Request::new(req)).await })?;
+        Ok(response.into_inner())
+    }
+    #[doc = "Load or reload a model from a repository."]
+    #[inline(always)]
+    pub fn repository_model_load(
+        &self,
+        req: inference::RepositoryModelLoadRequest,
+    ) -> Result<inference::RepositoryModelLoadResponse, Error> {
+        let mut inner = self.inner.clone();
+        let response = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async { inner.repository_model_load(tonic::Request::new(req)).await })?;
+        Ok(response.into_inner())
+    }
+    #[doc = "Unload a model."]
+    #[inline(always)]
+    pub fn repository_model_unload(
+        &self,
+        req: inference::RepositoryModelUnloadRequest,
+    ) -> Result<inference::RepositoryModelUnloadResponse, Error> {
+        let mut inner = self.inner.clone();
+        let response = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async {
+                inner
+                    .repository_model_unload(tonic::Request::new(req))
+                    .await
+            })?;
+        Ok(response.into_inner())
+    }
+    #[doc = "Get the status of all registered system-shared-memory regions."]
+    #[inline(always)]
+    pub fn system_shared_memory_status(
+        &self,
+        req: inference::SystemSharedMemoryStatusRequest,
+    ) -> Result<inference::SystemSharedMemoryStatusResponse, Error> {
+        let mut inner = self.inner.clone();
+        let response = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async {
+                inner
+                    .system_shared_memory_status(tonic::Request::new(req))
+                    .await
+            })?;
+        Ok(response.into_inner())
+    }
+    #[doc = "Register a system-shared-memory region."]
+    #[inline(always)]
+    pub fn system_shared_memory_register(
+        &self,
+        req: inference::SystemSharedMemoryRegisterRequest,
+    ) -> Result<inference::SystemSharedMemoryRegisterResponse, Error> {
+        let mut inner = self.inner.clone();
+        let response = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async {
+                inner
+                    .system_shared_memory_register(tonic::Request::new(req))
+                    .await
+            })?;
+        Ok(response.into_inner())
+    }
+    #[doc = "Unregister a system-shared-memory region."]
+    #[inline(always)]
+    pub fn system_shared_memory_unregister(
+        &self,
+        req: inference::SystemSharedMemoryUnregisterRequest,
+    ) -> Result<inference::SystemSharedMemoryUnregisterResponse, Error> {
+        let mut inner = self.inner.clone();
+        let response = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async {
+                inner
+                    .system_shared_memory_unregister(tonic::Request::new(req))
+                    .await
+            })?;
+        Ok(response.into_inner())
+    }
+    #[doc = "Get the status of all registered CUDA-shared-memory regions."]
+    #[inline(always)]
+    pub fn cuda_shared_memory_status(
+        &self,
+        req: inference::CudaSharedMemoryStatusRequest,
+    ) -> Result<inference::CudaSharedMemoryStatusResponse, Error> {
+        let mut inner = self.inner.clone();
+        let response = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async {
+                inner
+                    .cuda_shared_memory_status(tonic::Request::new(req))
+                    .await
+            })?;
+        Ok(response.into_inner())
+    }
+    #[doc = "Register a CUDA-shared-memory region."]
+    #[inline(always)]
+    pub fn cuda_shared_memory_register(
+        &self,
+        req: inference::CudaSharedMemoryRegisterRequest,
+    ) -> Result<inference::CudaSharedMemoryRegisterResponse, Error> {
+        let mut inner = self.inner.clone();
+        let response = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async {
+                inner
+                    .cuda_shared_memory_register(tonic::Request::new(req))
+                    .await
+            })?;
+        Ok(response.into_inner())
+    }
+    #[doc = "Unregister a CUDA-shared-memory region."]
+    #[inline(always)]
+    pub fn cuda_shared_memory_unregister(
+        &self,
+        req: inference::CudaSharedMemoryUnregisterRequest,
+    ) -> Result<inference::CudaSharedMemoryUnregisterResponse, Error> {
+        let mut inner = self.inner.clone();
+        let response = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async {
+                inner
+                    .cuda_shared_memory_unregister(tonic::Request::new(req))
+                    .await
+            })?;
+        Ok(response.into_inner())
+    }
+    #[doc = "Update and get the trace setting of the Triton server."]
+    #[inline(always)]
+    pub fn trace_setting(
+        &self,
+        req: inference::TraceSettingRequest,
+    ) -> Result<inference::TraceSettingResponse, Error> {
+        let mut inner = self.inner.clone();
+        let response = crate::TOKIO_RT
+            .get()
+            .context("failed to get tokio runtime")?
+            .block_on(async { inner.trace_setting(tonic::Request::new(req)).await })?;
+        Ok(response.into_inner())
+    }
 }
