@@ -1,0 +1,18 @@
+[project]
+name = "triton_client"
+version = "0.0.1"
+description = "triton-client"
+authors = [{ name = "ywg" }]
+requires-python = ">=3.12,<3.13"
+dependencies = []
+
+[build-system]
+requires = [
+    "maturin>=1,<2",
+    "cffi>=1.14; platform_python_implementation != 'PyPy'",
+    "setuptools!=74.0.0,!=74.1.0,!=74.1.1,!=74.1.2",
+]
+build-backend = "maturin"
+
+[tool.maturin]
+manylinux = "2014"

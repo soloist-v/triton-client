@@ -1,5 +1,5 @@
 [package]
-name = "triton-client"
+name = "triton_client"
 version = "0.2.0"
 authors = [
     "soloist-v <mr.sololife@gmail.com>",
