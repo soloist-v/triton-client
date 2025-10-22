@@ -7,6 +7,7 @@
 /// @@     and their instances.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModelRateLimiter {
     /// @@  .. cpp:var:: Resource resources (repeated)
@@ -36,6 +37,7 @@ pub mod model_rate_limiter {
     /// @@     The resource property.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct Resource {
         /// @@  .. cpp:var:: string name
@@ -69,6 +71,7 @@ pub mod model_rate_limiter {
 /// @@   available for those instances.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModelInstanceGroup {
     /// @@  .. cpp:var:: string name
@@ -161,6 +164,7 @@ pub mod model_instance_group {
     /// @@     A secondary device required for a model instance.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct SecondaryDevice {
         /// @@  .. cpp:var:: SecondaryDeviceKind kind
@@ -184,6 +188,7 @@ pub mod model_instance_group {
         /// @@     The kind of the secondary device.
         /// @@
         #[::pyo3::pyclass(get_all, set_all)]
+        #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(
             Clone,
             Copy,
@@ -229,6 +234,7 @@ pub mod model_instance_group {
     /// @@     Kind of this instance group.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(
         Clone,
         Copy,
@@ -302,6 +308,7 @@ pub mod model_instance_group {
 /// @@   Reshape specification for input and output tensors.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ModelTensorReshape {
     /// @@  .. cpp:var:: int64 shape (repeated)
@@ -317,6 +324,7 @@ pub struct ModelTensorReshape {
 /// @@   An input required by the model.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ModelInput {
     /// @@  .. cpp:var:: string name
@@ -398,6 +406,7 @@ pub mod model_input {
     /// @@     The format for the input.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(
         Clone,
         Copy,
@@ -464,6 +473,7 @@ pub mod model_input {
 /// @@   An output produced by the model.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ModelOutput {
     /// @@  .. cpp:var:: string name
@@ -525,6 +535,7 @@ pub struct ModelOutput {
 /// @@     the backend based on all the requests in a batch.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct BatchInput {
     /// @@    .. cpp:var:: Kind kind
@@ -564,6 +575,7 @@ pub mod batch_input {
     /// @@       The kind of the batch input.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(
         Clone,
         Copy,
@@ -674,6 +686,7 @@ pub mod batch_input {
 /// @@   differently by the backend based on all the requests in a batch.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct BatchOutput {
     /// @@  .. cpp:var:: string target_name (repeated)
@@ -705,6 +718,7 @@ pub mod batch_output {
     /// @@     The kind of the batch output.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(
         Clone,
         Copy,
@@ -754,6 +768,7 @@ pub mod batch_output {
 /// @@   available by the inference server.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ModelVersionPolicy {
     /// @@  .. cpp:var:: oneof policy_choice
@@ -772,6 +787,7 @@ pub mod model_version_policy {
     /// @@     the default policy.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct Latest {
         /// @@    .. cpp:var:: uint32 num_versions
@@ -789,6 +805,7 @@ pub mod model_version_policy {
     /// @@     Serve all versions of the model.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct All {}
     /// @@  .. cpp:var:: message Specific
@@ -796,6 +813,7 @@ pub mod model_version_policy {
     /// @@     Serve only specific versions of the model.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct Specific {
         /// @@    .. cpp:var:: int64 versions (repeated)
@@ -811,6 +829,7 @@ pub mod model_version_policy {
     /// @@     default policy is 'Latest'.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof)]
     pub enum PolicyChoice {
         /// @@    .. cpp:var:: Latest latest
@@ -841,6 +860,7 @@ pub mod model_version_policy {
 /// @@   it is loaded.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModelOptimizationPolicy {
     /// @@  .. cpp:var:: Graph graph
@@ -926,6 +946,7 @@ pub mod model_optimization_policy {
     /// @@     +1 enables only basic and extended optimizations.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct Graph {
         /// @@    .. cpp:var:: int32 level
@@ -946,6 +967,7 @@ pub mod model_optimization_policy {
     /// @@     CUDA-specific optimization settings.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Cuda {
         /// @@    .. cpp:var:: bool graphs
@@ -993,6 +1015,7 @@ pub mod model_optimization_policy {
         /// @@       Specification of the CUDA graph to be captured.
         /// @@
         #[::pyo3::pyclass(get_all, set_all)]
+        #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct GraphSpec {
             /// @@      .. cpp:var:: int32 batch_size
@@ -1036,6 +1059,7 @@ pub mod model_optimization_policy {
             /// @@         Specification of tensor dimension.
             /// @@
             #[::pyo3::pyclass(get_all, set_all)]
+            #[derive(::triton_client_macros::ImplPyNew)]
             #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
             pub struct Shape {
                 /// @@        .. cpp:var:: int64 dim (repeated)
@@ -1046,6 +1070,7 @@ pub mod model_optimization_policy {
                 pub dim: ::prost::alloc::vec::Vec<i64>,
             }
             #[::pyo3::pyclass(get_all, set_all)]
+            #[derive(::triton_client_macros::ImplPyNew)]
             #[derive(Clone, PartialEq, ::prost::Message)]
             pub struct LowerBound {
                 /// @@      .. cpp:var:: int32 batch_size
@@ -1086,6 +1111,7 @@ pub mod model_optimization_policy {
     /// @@         Default CPU Execution Provider
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ExecutionAccelerators {
         /// @@    .. cpp:var:: Accelerator gpu_execution_accelerator (repeated)
@@ -1153,6 +1179,7 @@ pub mod model_optimization_policy {
         /// @@     depending on the backends.
         /// @@
         #[::pyo3::pyclass(get_all, set_all)]
+        #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Accelerator {
             /// @@    .. cpp:var:: string name
@@ -1186,6 +1213,7 @@ pub mod model_optimization_policy {
     /// @@     memory will be used for delivering the outputs.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct PinnedMemoryBuffer {
         /// @@    .. cpp:var:: bool enable
@@ -1203,6 +1231,7 @@ pub mod model_optimization_policy {
     /// @@     priorities only work for TensorRT models.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(
         Clone,
         Copy,
@@ -1261,6 +1290,7 @@ pub mod model_optimization_policy {
 /// @@   Queue policy for inference requests.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ModelQueuePolicy {
     /// @@
@@ -1308,6 +1338,7 @@ pub mod model_queue_policy {
     /// @@     The action applied to timed-out requests.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(
         Clone,
         Copy,
@@ -1363,6 +1394,7 @@ pub mod model_queue_policy {
 /// @@   batching operates for the model.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModelDynamicBatching {
     /// @@  .. cpp:var:: int32 preferred_batch_size (repeated)
@@ -1439,6 +1471,7 @@ pub struct ModelDynamicBatching {
 /// @@   batching operates for the model.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModelSequenceBatching {
     /// @@  .. cpp:var:: uint64 max_sequence_idle_microseconds
@@ -1499,6 +1532,7 @@ pub mod model_sequence_batching {
     /// @@     communicate with a backend.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Control {
         /// @@    .. cpp:var:: Kind kind
@@ -1552,6 +1586,7 @@ pub mod model_sequence_batching {
         /// @@       The kind of the control.
         /// @@
         #[::pyo3::pyclass(get_all, set_all)]
+        #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(
             Clone,
             Copy,
@@ -1633,6 +1668,7 @@ pub mod model_sequence_batching {
     /// @@     The sequence control values to communicate by a model input.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ControlInput {
         /// @@    .. cpp:var:: string name
@@ -1655,6 +1691,7 @@ pub mod model_sequence_batching {
     /// @@     Settings used to initialize data for implicit state.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct InitialState {
         /// @@      .. cpp:var:: DataType data_type
@@ -1690,6 +1727,7 @@ pub mod model_sequence_batching {
         /// @@         Specify how the initial state data is generated.
         /// @@
         #[::pyo3::pyclass(get_all, set_all)]
+        #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof)]
         pub enum StateData {
             /// @@
@@ -1716,6 +1754,7 @@ pub mod model_sequence_batching {
     /// @@     An input / output pair of tensors that carry state for the sequence.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct State {
         /// @@    .. cpp:var:: string input_name
@@ -1792,6 +1831,7 @@ pub mod model_sequence_batching {
     /// @@     is the default strategy.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct StrategyDirect {
         /// @@    .. cpp:var:: uint64 max_queue_delay_microseconds
@@ -1830,6 +1870,7 @@ pub mod model_sequence_batching {
     /// @@     all inference requests of that sequence.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct StrategyOldest {
         /// @@    .. cpp:var:: int32 max_candidate_sequences
@@ -1889,6 +1930,7 @@ pub mod model_sequence_batching {
     /// @@     is 'direct'.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum StrategyChoice {
         /// @@    .. cpp:var:: StrategyDirect direct
@@ -1912,6 +1954,7 @@ pub mod model_sequence_batching {
 /// @@   compose the ensemble and how data flows between the models.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModelEnsembling {
     /// @@  .. cpp:var:: Step step (repeated)
@@ -1930,6 +1973,7 @@ pub mod model_ensembling {
     /// @@     and maps model output tensors to ensemble tensor names
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Step {
         /// @@  .. cpp:var:: string model_name
@@ -1986,6 +2030,7 @@ pub mod model_ensembling {
 /// @@   A model parameter.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ModelParameter {
     /// @@  .. cpp:var:: string string_value
@@ -2001,6 +2046,7 @@ pub struct ModelParameter {
 /// @@   Settings used to construct the request sample for model warmup.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModelWarmup {
     /// @@  .. cpp:var:: string name
@@ -2051,6 +2097,7 @@ pub mod model_warmup {
     /// @@     Meta data associated with an input.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct Input {
         /// @@    .. cpp:var:: DataType data_type
@@ -2083,6 +2130,7 @@ pub mod model_warmup {
         /// @@       back to 'zero_data'.
         /// @@
         #[::pyo3::pyclass(get_all, set_all)]
+        #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof)]
         pub enum InputDataType {
             /// @@
@@ -2123,6 +2171,7 @@ pub mod model_warmup {
 /// @@    The metadata of libraries providing custom operations for this model.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ModelOperations {
     /// @@  .. cpp:var:: string op_library_filename (repeated)
@@ -2140,6 +2189,7 @@ pub struct ModelOperations {
 /// @@    to be expected from the model.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ModelTransactionPolicy {
     /// @@  .. cpp:var:: bool decoupled
@@ -2160,6 +2210,7 @@ pub struct ModelTransactionPolicy {
 /// @@   The repository agents for the model.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModelRepositoryAgents {
     /// @@
@@ -2181,6 +2232,7 @@ pub mod model_repository_agents {
     /// @@     repository actions for this model.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Agent {
         /// @@    .. cpp:var:: string name
@@ -2206,6 +2258,7 @@ pub mod model_repository_agents {
 /// @@   The response cache setting for the model.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ModelResponseCache {
     /// @@
@@ -2228,6 +2281,7 @@ pub struct ModelResponseCache {
 /// @@     configuration.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModelMetrics {
     /// @@
@@ -2246,6 +2300,7 @@ pub mod model_metrics {
     /// @@     Override metrics settings of this model.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MetricControl {
         /// @@  .. cpp:var:: MetricIdentifier metric_identifier
@@ -2270,6 +2325,7 @@ pub mod model_metrics {
         /// @@     Specify metrics to be overridden with metric_option.
         /// @@
         #[::pyo3::pyclass(get_all, set_all)]
+        #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
         pub struct MetricIdentifier {
             /// @@  .. cpp:var:: string family
@@ -2287,6 +2343,7 @@ pub mod model_metrics {
         /// @@     Histogram metrics options.
         /// @@
         #[::pyo3::pyclass(get_all, set_all)]
+        #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct HistogramOptions {
             /// @@  .. cpp:var:: double buckets (repeated)
@@ -2305,6 +2362,7 @@ pub mod model_metrics {
         /// @@     The value to override the metrics defined in metric_identifier.
         /// @@
         #[::pyo3::pyclass(get_all, set_all)]
+        #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum MetricOptions {
             /// @@  .. cpp:var:: HistogramOptions histogram_options
@@ -2322,6 +2380,7 @@ pub mod model_metrics {
 /// @@   A model configuration.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModelConfig {
     /// @@  .. cpp:var:: string name
@@ -2519,6 +2578,7 @@ pub mod model_config {
     /// @@     policy is to execute each inference request independently.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum SchedulingChoice {
         /// @@    .. cpp:var:: ModelDynamicBatching dynamic_batching
@@ -2560,6 +2620,7 @@ pub mod model_config {
 /// @@   Data types supported for input and output tensors.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum DataType {
@@ -2646,6 +2707,7 @@ impl DataType {
 /// @@   Request message for ServerLive.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ServerLiveRequest {}
 /// @@
@@ -2654,6 +2716,7 @@ pub struct ServerLiveRequest {}
 /// @@   Response message for ServerLive.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ServerLiveResponse {
     /// @@
@@ -2670,6 +2733,7 @@ pub struct ServerLiveResponse {
 /// @@   Request message for ServerReady.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ServerReadyRequest {}
 /// @@
@@ -2678,6 +2742,7 @@ pub struct ServerReadyRequest {}
 /// @@   Response message for ServerReady.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ServerReadyResponse {
     /// @@
@@ -2694,6 +2759,7 @@ pub struct ServerReadyResponse {
 /// @@   Request message for ModelReady.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ModelReadyRequest {
     /// @@
@@ -2717,6 +2783,7 @@ pub struct ModelReadyRequest {
 /// @@   Response message for ModelReady.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ModelReadyResponse {
     /// @@
@@ -2733,6 +2800,7 @@ pub struct ModelReadyResponse {
 /// @@   Request message for ServerMetadata.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ServerMetadataRequest {}
 /// @@
@@ -2741,6 +2809,7 @@ pub struct ServerMetadataRequest {}
 /// @@   Response message for ServerMetadata.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ServerMetadataResponse {
     /// @@
@@ -2771,6 +2840,7 @@ pub struct ServerMetadataResponse {
 /// @@   Request message for ModelMetadata.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ModelMetadataRequest {
     /// @@
@@ -2795,6 +2865,7 @@ pub struct ModelMetadataRequest {
 /// @@   Response message for ModelMetadata.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModelMetadataResponse {
     /// @@
@@ -2841,6 +2912,7 @@ pub mod model_metadata_response {
     /// @@     Metadata for a tensor.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct TensorMetadata {
         /// @@
@@ -2873,6 +2945,7 @@ pub mod model_metadata_response {
 /// @@   An inference parameter value.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InferParameter {
     /// @@  .. cpp:var:: oneof parameter_choice
@@ -2899,6 +2972,7 @@ pub mod infer_parameter {
     /// @@           are not supported for custom parameters
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ParameterChoice {
         /// @@    .. cpp:var:: bool bool_param
@@ -2943,6 +3017,7 @@ pub mod infer_parameter {
 /// @@   because oneofs cannot contain repeated fields.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InferTensorContents {
     /// @@
@@ -3026,6 +3101,7 @@ pub struct InferTensorContents {
 /// @@   Request message for ModelInfer.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModelInferRequest {
     /// @@  .. cpp:var:: string model_name
@@ -3109,6 +3185,7 @@ pub mod model_infer_request {
     /// @@     An input tensor for an inference request.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InferInputTensor {
         /// @@
@@ -3156,6 +3233,7 @@ pub mod model_infer_request {
     /// @@     An output tensor requested for an inference request.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InferRequestedOutputTensor {
         /// @@
@@ -3182,6 +3260,7 @@ pub mod model_infer_request {
 /// @@   Response message for ModelInfer.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModelInferResponse {
     /// @@  .. cpp:var:: string model_name
@@ -3252,6 +3331,7 @@ pub mod model_infer_response {
     /// @@     An output tensor returned for an inference request.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InferOutputTensor {
         /// @@
@@ -3300,6 +3380,7 @@ pub mod model_infer_response {
 /// @@   Response message for ModelStreamInfer.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModelStreamInferResponse {
     /// @@
@@ -3324,6 +3405,7 @@ pub struct ModelStreamInferResponse {
 /// @@   Request message for ModelConfig.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ModelConfigRequest {
     /// @@
@@ -3347,6 +3429,7 @@ pub struct ModelConfigRequest {
 /// @@   Response message for ModelConfig.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModelConfigResponse {
     /// @@
@@ -3363,6 +3446,7 @@ pub struct ModelConfigResponse {
 /// @@   Request message for ModelStatistics.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ModelStatisticsRequest {
     /// @@  .. cpp:var:: string name
@@ -3386,6 +3470,7 @@ pub struct ModelStatisticsRequest {
 /// @@   Statistic recording a cumulative duration metric.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct StatisticDuration {
     /// @@  .. cpp:var:: uint64 count
@@ -3407,6 +3492,7 @@ pub struct StatisticDuration {
 /// @@   Inference statistics.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct InferStatistics {
     /// @@  .. cpp:var:: StatisticDuration success
@@ -3505,6 +3591,7 @@ pub struct InferStatistics {
 /// @@   Statistics per response.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct InferResponseStatistics {
     /// @@  .. cpp:var:: StatisticDuration compute_infer
@@ -3552,6 +3639,7 @@ pub struct InferResponseStatistics {
 /// @@   Inference batch statistics.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct InferBatchStatistics {
     /// @@  .. cpp:var:: uint64 batch_size
@@ -3592,6 +3680,7 @@ pub struct InferBatchStatistics {
 /// @@   Memory usage.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct MemoryUsage {
     /// @@  .. cpp:var:: string type
@@ -3620,6 +3709,7 @@ pub struct MemoryUsage {
 /// @@   Statistics for a specific model and version.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModelStatistics {
     /// @@  .. cpp:var:: string name
@@ -3717,6 +3807,7 @@ pub struct ModelStatistics {
 /// @@   Response message for ModelStatistics.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModelStatisticsResponse {
     /// @@  .. cpp:var:: ModelStatistics model_stats (repeated)
@@ -3732,6 +3823,7 @@ pub struct ModelStatisticsResponse {
 /// @@   An model repository parameter value.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ModelRepositoryParameter {
     /// @@  .. cpp:var:: oneof parameter_choice
@@ -3752,6 +3844,7 @@ pub mod model_repository_parameter {
     /// @@     a boolean
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof)]
     pub enum ParameterChoice {
         /// @@    .. cpp:var:: bool bool_param
@@ -3786,6 +3879,7 @@ pub mod model_repository_parameter {
 /// @@   Request message for RepositoryIndex.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct RepositoryIndexRequest {
     /// @@  .. cpp:var:: string repository_name
@@ -3808,6 +3902,7 @@ pub struct RepositoryIndexRequest {
 /// @@   Response message for RepositoryIndex.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RepositoryIndexResponse {
     /// @@
@@ -3826,6 +3921,7 @@ pub mod repository_index_response {
     /// @@     Index entry for a model.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct ModelIndex {
         /// @@
@@ -3863,6 +3959,7 @@ pub mod repository_index_response {
 /// @@   Request message for RepositoryModelLoad.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RepositoryModelLoadRequest {
     /// @@  .. cpp:var:: string repository_name
@@ -3894,6 +3991,7 @@ pub struct RepositoryModelLoadRequest {
 /// @@   Response message for RepositoryModelLoad.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct RepositoryModelLoadResponse {}
 /// @@
@@ -3902,6 +4000,7 @@ pub struct RepositoryModelLoadResponse {}
 /// @@   Request message for RepositoryModelUnload.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RepositoryModelUnloadRequest {
     /// @@  .. cpp:var:: string repository_name
@@ -3933,6 +4032,7 @@ pub struct RepositoryModelUnloadRequest {
 /// @@   Response message for RepositoryModelUnload.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct RepositoryModelUnloadResponse {}
 /// @@
@@ -3941,6 +4041,7 @@ pub struct RepositoryModelUnloadResponse {}
 /// @@   Request message for SystemSharedMemoryStatus.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct SystemSharedMemoryStatusRequest {
     /// @@
@@ -3958,6 +4059,7 @@ pub struct SystemSharedMemoryStatusRequest {
 /// @@   Response message for SystemSharedMemoryStatus.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SystemSharedMemoryStatusResponse {
     /// @@
@@ -3980,6 +4082,7 @@ pub mod system_shared_memory_status_response {
     /// @@     Status for a shared memory region.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct RegionStatus {
         /// @@
@@ -4017,6 +4120,7 @@ pub mod system_shared_memory_status_response {
 /// @@   Request message for SystemSharedMemoryRegister.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct SystemSharedMemoryRegisterRequest {
     /// @@
@@ -4053,6 +4157,7 @@ pub struct SystemSharedMemoryRegisterRequest {
 /// @@   Response message for SystemSharedMemoryRegister.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct SystemSharedMemoryRegisterResponse {}
 /// @@
@@ -4061,6 +4166,7 @@ pub struct SystemSharedMemoryRegisterResponse {}
 /// @@   Request message for SystemSharedMemoryUnregister.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct SystemSharedMemoryUnregisterRequest {
     /// @@
@@ -4078,6 +4184,7 @@ pub struct SystemSharedMemoryUnregisterRequest {
 /// @@   Response message for SystemSharedMemoryUnregister.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct SystemSharedMemoryUnregisterResponse {}
 /// @@
@@ -4086,6 +4193,7 @@ pub struct SystemSharedMemoryUnregisterResponse {}
 /// @@   Request message for CudaSharedMemoryStatus.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CudaSharedMemoryStatusRequest {
     /// @@
@@ -4103,6 +4211,7 @@ pub struct CudaSharedMemoryStatusRequest {
 /// @@   Response message for CudaSharedMemoryStatus.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CudaSharedMemoryStatusResponse {
     /// @@
@@ -4125,6 +4234,7 @@ pub mod cuda_shared_memory_status_response {
     /// @@     Status for a shared memory region.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct RegionStatus {
         /// @@
@@ -4154,6 +4264,7 @@ pub mod cuda_shared_memory_status_response {
 /// @@   Request message for CudaSharedMemoryRegister.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CudaSharedMemoryRegisterRequest {
     /// @@
@@ -4188,6 +4299,7 @@ pub struct CudaSharedMemoryRegisterRequest {
 /// @@   Response message for CudaSharedMemoryRegister.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CudaSharedMemoryRegisterResponse {}
 /// @@
@@ -4196,6 +4308,7 @@ pub struct CudaSharedMemoryRegisterResponse {}
 /// @@   Request message for CudaSharedMemoryUnregister.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CudaSharedMemoryUnregisterRequest {
     /// @@
@@ -4213,6 +4326,7 @@ pub struct CudaSharedMemoryUnregisterRequest {
 /// @@   Response message for CudaSharedMemoryUnregister.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct CudaSharedMemoryUnregisterResponse {}
 /// @@
@@ -4221,6 +4335,7 @@ pub struct CudaSharedMemoryUnregisterResponse {}
 /// @@   Request message for TraceSetting.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TraceSettingRequest {
     /// @@  .. cpp:var:: map\<string,SettingValue> settings
@@ -4252,6 +4367,7 @@ pub mod trace_setting_request {
     /// @@     the global setting value will be used.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct SettingValue {
         /// @@
@@ -4269,6 +4385,7 @@ pub mod trace_setting_request {
 /// @@   Response message for TraceSetting.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TraceSettingResponse {
     /// @@  .. cpp:var:: map\<string,SettingValue> settings
@@ -4290,6 +4407,7 @@ pub mod trace_setting_response {
     /// @@     The values to be associated with a trace setting.
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct SettingValue {
         /// @@
@@ -4307,6 +4425,7 @@ pub mod trace_setting_response {
 /// @@   Request message for LogSettings.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LogSettingsRequest {
     /// @@  .. cpp:var:: map\<string,SettingValue> settings
@@ -4322,6 +4441,7 @@ pub struct LogSettingsRequest {
 /// Nested message and enum types in `LogSettingsRequest`.
 pub mod log_settings_request {
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct SettingValue {
         #[prost(oneof = "setting_value::ParameterChoice", tags = "1, 2, 3")]
@@ -4330,6 +4450,7 @@ pub mod log_settings_request {
     /// Nested message and enum types in `SettingValue`.
     pub mod setting_value {
         #[::pyo3::pyclass(get_all, set_all)]
+        #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof)]
         pub enum ParameterChoice {
             /// @@    .. cpp:var:: bool bool_param
@@ -4359,6 +4480,7 @@ pub mod log_settings_request {
 /// @@   Response message for LogSettings.
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
+#[derive(::triton_client_macros::ImplPyNew)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LogSettingsResponse {
     /// @@  .. cpp:var:: map\<string,SettingValue> settings
@@ -4374,6 +4496,7 @@ pub struct LogSettingsResponse {
 /// Nested message and enum types in `LogSettingsResponse`.
 pub mod log_settings_response {
     #[::pyo3::pyclass(get_all, set_all)]
+    #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct SettingValue {
         #[prost(oneof = "setting_value::ParameterChoice", tags = "1, 2, 3")]
@@ -4382,6 +4505,7 @@ pub mod log_settings_response {
     /// Nested message and enum types in `SettingValue`.
     pub mod setting_value {
         #[::pyo3::pyclass(get_all, set_all)]
+        #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof)]
         pub enum ParameterChoice {
             /// @@    .. cpp:var:: bool bool_param

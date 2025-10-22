@@ -2,9 +2,9 @@ use crate::error::Error;
 use anyhow::Context;
 use tonic::metadata::{AsciiMetadataValue, MetadataValue};
 use tonic::service::Interceptor;
-use tonic::transport::channel::ClientTlsConfig;
 use tonic::transport::Channel;
-use tonic::{service::interceptor::InterceptedService, Status};
+use tonic::transport::channel::ClientTlsConfig;
+use tonic::{Status, service::interceptor::InterceptedService};
 
 use super::inference;
 use super::inference::grpc_inference_service_client::GrpcInferenceServiceClient;

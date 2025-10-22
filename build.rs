@@ -5,7 +5,6 @@ use std::ffi::OsStr;
 use std::path::{Path, PathBuf};
 use walkdir::WalkDir;
 
-
 /// Return a list of all .proto files in the given directory, recursively.
 fn get_protobuf_paths<P: AsRef<Path>>(directory: P) -> std::io::Result<Vec<PathBuf>> {
     let mut paths: Vec<PathBuf> = vec![];
@@ -19,7 +18,15 @@ fn get_protobuf_paths<P: AsRef<Path>>(directory: P) -> std::io::Result<Vec<PathB
 }
 
 fn main() -> Result<()> {
-    let (protoc_bin, _) = protoc_prebuilt::init("33.0").unwrap();
+    let protoc_bin = match protoc_prebuilt::init("33.0") {
+        Ok(a) => {a.0}
+        Err(e) => {
+            println!("cargo:msg={}", e);
+            let out_dir = env::var("OUT_DIR").unwrap();
+            let protoc_path = protoc_fetcher::protoc("33.0", Path::new(&out_dir)).unwrap();
+            protoc_path
+        }
+    };
     unsafe { env::set_var("PROTOC", protoc_bin) };
     // The toplevel types directory.
     let pb_dir: PathBuf = env::var("TRITON_PROTOBUF")
@@ -43,8 +50,8 @@ fn main() -> Result<()> {
         .out_dir("src")
         // 为所有类型添加 pyclass 属性
         .type_attribute(".", "#[::pyo3::pyclass(get_all, set_all)]")
-        // 为所有类型添加我们的宏（实现类型转换 traits）
-        // .type_attribute(".", "#[derive(::triton_client_macros::TritonPyClass)]")
+        // 为所有类型添加我们的宏（实现带可选参数的构造函数）
+        .type_attribute(".", "#[derive(::triton_client_macros::ImplPyNew)]")
         .compile_protos(&protobuf_paths, &[pb_dir])
         .context("unable to compile Protocol Buffers for the Triton client")?;
 

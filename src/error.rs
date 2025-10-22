@@ -29,7 +29,7 @@ impl From<anyhow::Error> for Error {
 
 impl From<Error> for pyo3::PyErr {
     fn from(error: Error) -> Self {
-        pyo3::exceptions::PyException::new_err(format!("{:#}", error))
+        pyo3::exceptions::PyException::new_err(format!("{:?}", error))
     }
 }
 
