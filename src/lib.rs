@@ -66,5 +66,6 @@ fn triton_client(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<inference::InferTensorContents>()?;
     m.add_class::<inference::ModelConfig>()?;
     m.add_class::<inference::model_infer_response::InferOutputTensor>()?;
+    m.add_class::<inference::repository_index_response::ModelIndex>()?;
     Ok(())
 }
