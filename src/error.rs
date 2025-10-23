@@ -1,22 +1,27 @@
 use http::uri::InvalidUri;
+use numpy::{FromVecError, NotContiguousError};
 use tonic::Status;
 
 #[derive(thiserror::Error, Debug)]
 pub enum Error {
     #[error("General error: {0}")]
     Msg(String),
-    #[error("a gRPC transport error has occurred: {0}")]
+    #[error(transparent)]
     TransportError(#[from] tonic::transport::Error),
-    #[error("the client was provided and invalid URI: {0}")]
+    #[error(transparent)]
     InvalidUri(#[from] InvalidUri),
-    #[error("invalid access token")]
+    #[error(transparent)]
     InvalidAccessToken(#[from] tonic::metadata::errors::InvalidMetadataValue),
-    #[error("grpc call returned error status")]
+    #[error(transparent)]
     ResponseError(#[from] Status),
-    #[error("JSON serialization error: {0}")]
+    #[error(transparent)]
     JsonError(#[from] serde_json::Error),
-    #[error("Protobuf encoding error: {0}")]
+    #[error(transparent)]
     EncodeError(#[from] prost::EncodeError),
+    #[error(transparent)]
+    FromVecError(#[from] FromVecError),
+    #[error(transparent)]
+    NotContiguousError(#[from] NotContiguousError),
 }
 
 pub type Result<T, E = Error> = std::result::Result<T, E>;
@@ -29,7 +34,7 @@ impl From<anyhow::Error> for Error {
 
 impl From<Error> for pyo3::PyErr {
     fn from(error: Error) -> Self {
-        pyo3::exceptions::PyException::new_err(format!("{:?}", error))
+        pyo3::exceptions::PyException::new_err(format!("{:#}", error))
     }
 }
 
