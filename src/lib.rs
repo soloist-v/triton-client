@@ -18,7 +18,9 @@ static TOKIO_RT: OnceCell<tokio::runtime::Runtime> = OnceCell::const_new();
 fn triton_client(m: &Bound<'_, PyModule>) -> PyResult<()> {
     utils::init_log(std::env::var("LOG_LEVEL").unwrap_or("INFO".to_string()));
     let rt = tokio::runtime::Runtime::new()?;
-    TOKIO_RT.set(rt).expect("async runtime already initialized");
+    if let Err(e) = TOKIO_RT.set(rt) {
+        log::error!("TRITON_CLIENT RUNTIME SET ERROR: {:#}", e);
+    }
     // Add client class
     m.add_class::<Client>()?;
     // Add request/response types
@@ -63,6 +65,7 @@ fn triton_client(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<inference::InferParameter>()?;
     m.add_class::<inference::infer_parameter::ParameterChoice>()?;
     m.add_class::<inference::model_infer_request::InferInputTensor>()?;
+    m.add_class::<inference::model_infer_request::InferRequestedOutputTensor>()?;
     m.add_class::<inference::InferTensorContents>()?;
     m.add_class::<inference::ModelConfig>()?;
     m.add_class::<inference::model_infer_response::InferOutputTensor>()?;
