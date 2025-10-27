@@ -1,10 +1,31 @@
 [project]
 name = "triton_client"
 version = "0.0.1"
-description = "triton-client"
+description = "High-performance Triton Inference Server client for Python"
 authors = [{ name = "ywg" }]
+readme = "README.md"
+license = { text = "MIT" }
 requires-python = ">=3.12,<3.13"
-dependencies = []
+dependencies = [
+    "numpy>=1.20.0",
+]
+keywords = ["triton", "inference", "grpc", "machine-learning", "ai"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Rust",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Homepage = "https://github.com/your-username/triton-client"
+Repository = "https://github.com/your-username/triton-client"
+Documentation = "https://github.com/your-username/triton-client#readme"
+Issues = "https://github.com/your-username/triton-client/issues"
 
 [build-system]
 requires = [
@@ -16,3 +37,5 @@ build-backend = "maturin"
 
 [tool.maturin]
 manylinux = "2014"
+python-source = "python"
+module-name = "triton_client"

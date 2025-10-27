@@ -1,0 +1,164 @@
+name: Build and Publish
+
+on:
+  push:
+    tags:
+      - 'v*'  # 当推送版本标签时触发
+  workflow_dispatch:  # 允许手动触发
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    name: Build wheels
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            platform: linux_x86_64
+          - os: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+            platform: linux_aarch64
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            platform: win_amd64
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          target: ${{ matrix.target }}
+          override: true
+          components: rustfmt, clippy
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install system dependencies (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pkg-config libssl-dev
+
+      - name: Install system dependencies (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          # Windows dependencies are handled by the Rust toolchain
+          echo "Windows dependencies installed"
+
+      - name: Build wheel
+        run: |
+          uv build --wheel --target ${{ matrix.target }}
+
+      - name: Upload wheel artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: wheel-${{ matrix.platform }}
+          path: dist/*.whl
+          retention-days: 7
+
+  publish:
+    name: Publish to PyPI
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+      - name: Download all wheels
+        uses: actions/download-artifact@v4
+        with:
+          path: dist/
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+
+      - name: Publish to PyPI
+        run: |
+          uv publish dist/*.whl
+        env:
+          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+
+  test-wheel:
+    name: Test wheel installation
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Download wheel artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist/
+
+      - name: Install wheel
+        run: |
+          uv pip install dist/*.whl
+
+      - name: Test import
+        run: |
+          python -c "import triton_client; print('✓ triton_client imported successfully')"
+
+      - name: Test basic functionality
+        run: |
+          python -c "
+          import triton_client
+          import numpy as np
+          
+          # Test enum constructors
+          data_type = triton_client.DataType.type_fp32()
+          print(f'✓ DataType created: {data_type}')
+          
+          # Test struct constructors
+          tensor_contents = triton_client.InferTensorContents()
+          test_data = np.array([1.0, 2.0, 3.0], dtype=np.float32)
+          tensor_contents.replace_fp32_contents(test_data)
+          print(f'✓ InferTensorContents created and populated')
+          
+          # Test input tensor creation
+          input_tensor = triton_client.InferInputTensor(
+              name='test_input',
+              datatype='FP32',
+              shape=[1, 3],
+              parameters={},
+              contents=tensor_contents,
+          )
+          print(f'✓ InferInputTensor created: {input_tensor}')
+          
+          # Test output tensor creation
+          output_tensor = triton_client.InferRequestedOutputTensor(
+              name='test_output',
+              parameters={},
+          )
+          print(f'✓ InferRequestedOutputTensor created: {output_tensor}')
+          
+          print('✓ All basic functionality tests passed!')
+          "
