@@ -37,5 +37,5 @@ build-backend = "maturin"
 
 [tool.maturin]
 manylinux = "2014"
-python-source = "python"
+python-source = "tritonclient"
 module-name = "triton_client"

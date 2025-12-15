@@ -2,7 +2,7 @@
 //!
 //! 提供 `List<T>` 和 `VecRef<T>` 类型，用于在 Python 中更方便地操作 Vec 字段
 
-use numpy::{PyArray1, PyArrayMethods, PyReadonlyArray1, PyUntypedArrayMethods};
+use numpy::{PyArray1, PyArrayMethods, PyReadonlyArray1};
 use pyo3::prelude::*;
 use pyo3::types::PyList;
 use std::ops::{Deref, DerefMut};
