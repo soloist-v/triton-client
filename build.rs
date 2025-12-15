@@ -19,7 +19,7 @@ fn get_protobuf_paths<P: AsRef<Path>>(directory: P) -> std::io::Result<Vec<PathB
 
 fn main() -> Result<()> {
     let protoc_bin = match protoc_prebuilt::init("33.0") {
-        Ok(a) => {a.0}
+        Ok(a) => a.0,
         Err(e) => {
             println!("cargo:msg={}", e);
             let out_dir = env::var("OUT_DIR").unwrap();
@@ -52,6 +52,7 @@ fn main() -> Result<()> {
         .type_attribute(".", "#[::pyo3::pyclass(get_all, set_all)]")
         // 为所有类型添加我们的宏（实现带可选参数的构造函数）
         .type_attribute(".", "#[derive(::triton_client_macros::ImplPyNew)]")
+        .type_attribute(".", "#[derive(::triton_client_macros::ImplPyVecAccessors)]")
         .compile_protos(&protobuf_paths, &[pb_dir])
         .context("unable to compile Protocol Buffers for the Triton client")?;
 

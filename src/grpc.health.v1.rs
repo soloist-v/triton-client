@@ -6,6 +6,7 @@
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
 #[derive(::triton_client_macros::ImplPyNew)]
+#[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct HealthCheckRequest {
     #[prost(string, tag = "1")]
@@ -18,6 +19,7 @@ pub struct HealthCheckRequest {
 /// @@
 #[::pyo3::pyclass(get_all, set_all)]
 #[derive(::triton_client_macros::ImplPyNew)]
+#[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct HealthCheckResponse {
     #[prost(enumeration = "health_check_response::ServingStatus", tag = "1")]
@@ -32,6 +34,7 @@ pub mod health_check_response {
     /// @@
     #[::pyo3::pyclass(get_all, set_all)]
     #[derive(::triton_client_macros::ImplPyNew)]
+    #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(
         Clone,
         Copy,

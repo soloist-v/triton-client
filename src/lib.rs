@@ -1,10 +1,10 @@
 #![doc = include_str!("../README.md")]
 
 pub mod client;
-mod error;
 mod inference;
-mod py_types;
+// mod py_types;
 mod utils;
+mod error;
 
 pub use client::Client;
 pub use error::{Error, Result};
@@ -29,6 +29,7 @@ fn triton_client(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<inference::ModelReadyRequest>()?;
     m.add_class::<inference::ModelReadyResponse>()?;
     m.add_class::<inference::ServerMetadataResponse>()?;
+    m.add_class::<inference::ModelConfig>()?;
     m.add_class::<inference::ModelMetadataRequest>()?;
     m.add_class::<inference::ModelMetadataResponse>()?;
     m.add_class::<inference::ModelInferRequest>()?;
@@ -37,6 +38,11 @@ fn triton_client(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<inference::ModelConfigResponse>()?;
     m.add_class::<inference::ModelStatisticsRequest>()?;
     m.add_class::<inference::ModelStatisticsResponse>()?;
+    m.add_class::<inference::TraceSettingRequest>()?;
+    m.add_class::<inference::TraceSettingResponse>()?;
+    m.add_class::<inference::InferParameter>()?;
+    m.add_class::<inference::InferTensorContents>()?;
+    m.add_class::<inference::ModelRepositoryParameter>()?;
     m.add_class::<inference::RepositoryIndexRequest>()?;
     m.add_class::<inference::RepositoryIndexResponse>()?;
     m.add_class::<inference::RepositoryModelLoadRequest>()?;
@@ -55,20 +61,26 @@ fn triton_client(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<inference::CudaSharedMemoryRegisterResponse>()?;
     m.add_class::<inference::CudaSharedMemoryUnregisterRequest>()?;
     m.add_class::<inference::CudaSharedMemoryUnregisterResponse>()?;
-    m.add_class::<inference::TraceSettingRequest>()?;
-    m.add_class::<inference::TraceSettingResponse>()?;
     // child types
-    m.add_class::<inference::system_shared_memory_status_response::RegionStatus>()?;
-    m.add_class::<inference::ModelRepositoryParameter>()?;
     m.add_class::<inference::model_repository_parameter::ParameterChoice>()?;
     m.add_class::<inference::model_metadata_response::TensorMetadata>()?;
-    m.add_class::<inference::InferParameter>()?;
     m.add_class::<inference::infer_parameter::ParameterChoice>()?;
     m.add_class::<inference::model_infer_request::InferInputTensor>()?;
+    m.add_class::<inference::system_shared_memory_status_response::RegionStatus>()?;
     m.add_class::<inference::model_infer_request::InferRequestedOutputTensor>()?;
-    m.add_class::<inference::InferTensorContents>()?;
-    m.add_class::<inference::ModelConfig>()?;
     m.add_class::<inference::model_infer_response::InferOutputTensor>()?;
     m.add_class::<inference::repository_index_response::ModelIndex>()?;
+    // Add List and VecRef types
+    m.add_class::<py_vec_types::ListBool>()?;
+    m.add_class::<py_vec_types::ListI8>()?;
+    m.add_class::<py_vec_types::ListI16>()?;
+    m.add_class::<py_vec_types::ListI32>()?;
+    m.add_class::<py_vec_types::ListI64>()?;
+    m.add_class::<py_vec_types::ListU8>()?;
+    m.add_class::<py_vec_types::ListU16>()?;
+    m.add_class::<py_vec_types::ListU32>()?;
+    m.add_class::<py_vec_types::ListU64>()?;
+    m.add_class::<py_vec_types::ListF32>()?;
+    m.add_class::<py_vec_types::ListF64>()?;
     Ok(())
 }

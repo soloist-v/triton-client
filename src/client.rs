@@ -1,5 +1,6 @@
 use crate::error::Error;
 use anyhow::Context;
+use pyo3::types::PyAnyMethods;
 use tonic::metadata::{AsciiMetadataValue, MetadataValue};
 use tonic::service::Interceptor;
 use tonic::transport::Channel;
@@ -135,8 +136,9 @@ impl Client {
     #[inline(always)]
     pub fn model_infer(
         &self,
-        req: inference::ModelInferRequest,
+        req: pyo3::Bound<'_, pyo3::PyAny>,
     ) -> Result<inference::ModelInferResponse, Error> {
+        let req = req.extract::<inference::ModelInferRequest>().map_err(Error::msg)?;
         let mut inner = self.inner.clone();
         let response = crate::TOKIO_RT
             .get()

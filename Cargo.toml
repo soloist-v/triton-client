@@ -16,7 +16,7 @@ name = "triton_client"
 crate-type = ["cdylib"]
 
 [features]
-default = ["dep:serde_json"]
+default = []
 
 [dependencies]
 log = { version = "0.4.28", features = ["release_max_level_info"] }
@@ -30,7 +30,8 @@ anyhow = "1"
 http = { version = "1", default-features = false }
 pyo3 = { version = "0.27", features = ["extension-module", "multiple-pymethods"] }
 numpy = { version = "0.27" }
-serde_json = { version = "1", optional = true }
+serde_json = { version = "1" }
+py_vec_types = { path = "py_vec_types" }
 triton-client-macros = { path = "triton-client-macros" }
 
 [build-dependencies]

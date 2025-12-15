@@ -1,6 +1,7 @@
 use http::uri::InvalidUri;
 use numpy::{FromVecError, NotContiguousError};
 use tonic::Status;
+use serde_json::Error as SerdeJsonError;
 
 #[derive(thiserror::Error, Debug)]
 pub enum Error {
@@ -15,7 +16,7 @@ pub enum Error {
     #[error(transparent)]
     ResponseError(#[from] Status),
     #[error(transparent)]
-    JsonError(#[from] serde_json::Error),
+    JsonError(#[from] SerdeJsonError),
     #[error(transparent)]
     EncodeError(#[from] prost::EncodeError),
     #[error(transparent)]

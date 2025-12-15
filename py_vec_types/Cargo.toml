@@ -1,0 +1,15 @@
+[package]
+name = "py_vec_types"
+version = "0.2.0"
+authors = [
+    "soloist-v <mr.sololife@gmail.com>",
+]
+edition = "2024"
+license = "Apache-2.0"
+repository = "https://github.com/octoml/triton-client"
+description = "A client for interfacing with NVIDIA Triton inference server."
+keywords = ["inference", "nvidia", "triton"]
+
+[dependencies]
+pyo3 = { version = "0.27", features = ["extension-module", "multiple-pymethods"] }
+numpy = { version = "0.27" }
