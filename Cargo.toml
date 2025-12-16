@@ -1,12 +1,12 @@
 [package]
-name = "triton_client"
-version = "0.2.0"
+name = "triton-client"
+version = "0.1.0"
 authors = [
     "soloist-v <mr.sololife@gmail.com>",
 ]
 edition = "2024"
 license = "Apache-2.0"
-repository = "https://github.com/octoml/triton-client"
+repository = "https://github.com/soloist-v/triton-client"
 description = "A client for interfacing with NVIDIA Triton inference server."
 keywords = ["inference", "nvidia", "triton"]
 readme = "README.md"
