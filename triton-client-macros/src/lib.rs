@@ -548,35 +548,38 @@ fn generate_vec_accessors_impl(name: &syn::Ident, fields: &Fields) -> TokenStrea
     
     // 为每个 Vec<T> 字段生成 getter/setter
     let accessors: Vec<_> = field_info.iter().map(|(field_name, inner_type)| {
-        let field_name_str = capitalize_first_letter(field_name.to_string());
+        // let field_name_str = capitalize_first_letter(field_name.to_string());
         let getter_name = syn::Ident::new(
-            &format!("get{}", field_name_str),
+            &format!("Get_{}", field_name),
             field_name.span(),
         );
         let setter_name = syn::Ident::new(
-            &format!("set{}", field_name_str),
+            &format!("Set_{}", field_name),
             field_name.span(),
         );
 
         let take_name = syn::Ident::new(
-            &format!("take{}", field_name_str),
+            &format!("Take_{}", field_name),
             field_name.span(),
         );
 
         let repace_name = syn::Ident::new(
-            &format!("replace{}", field_name_str),
+            &format!("Replace_{}", field_name),
             field_name.span(),
         );
-        
+
+
         let list_type_name = get_type_info(inner_type);
         
         quote! {
             // get 方法：简单克隆，用于一般访问（性能不敏感）
+            #[allow(non_snake_case)]
             fn #getter_name(&self, py: Python) -> ::py_vec_types::#list_type_name {
                 ::py_vec_types::#list_type_name::new(self.#field_name.clone())
             }
 
             // take 方法：转移所有权，用于 model_infer 等性能关键场景
+            #[allow(non_snake_case)]
             fn #take_name(&mut self, py: Python) -> ::py_vec_types::#list_type_name {
                 let data = std::mem::replace(&mut self.#field_name, vec![]);
                 ::py_vec_types::#list_type_name::new(data)
@@ -584,6 +587,7 @@ fn generate_vec_accessors_impl(name: &syn::Ident, fields: &Fields) -> TokenStrea
 
             // replace 方法：转移所有权替换，用于 model_infer 等性能关键场景
             // 通过 extract 实现所有权转移，避免数据拷贝
+            #[allow(non_snake_case)]
             fn #repace_name(&mut self, py: Python, val: ::pyo3::Bound<'_, ::pyo3::PyAny>) -> pyo3::PyResult<::py_vec_types::#list_type_name> {
                 let new_val: ::py_vec_types::#list_type_name = pyo3::types::PyAnyMethods::extract(&val)?;
                 let data = std::mem::replace(&mut self.#field_name, new_val.into_vec());
@@ -592,6 +596,7 @@ fn generate_vec_accessors_impl(name: &syn::Ident, fields: &Fields) -> TokenStrea
             
             // set 方法：简单设置，直接拷贝数据（性能不敏感的场景）
             // 直接接受 List 类型，不需要 extract，因为普通设置操作拷贝数据也可以接受
+            #[allow(non_snake_case)]
             fn #setter_name(&mut self, list: ::py_vec_types::#list_type_name) {
                 self.#field_name = list.into_vec();
             }
@@ -689,15 +694,15 @@ fn to_snake_case(s: &str) -> String {
     result
 }
 
-fn capitalize_first_letter(s: String) -> String {
-    let mut chars = s.chars();
-
-    match chars.next() {
-        Some(first) if first.is_alphabetic() => {
-            let mut result = first.to_uppercase().to_string();
-            result.push_str(chars.as_str());
-            result
-        }
-        _ => s,
-    }
-}
+// fn capitalize_first_letter(s: String) -> String {
+//     let mut chars = s.chars();
+//
+//     match chars.next() {
+//         Some(first) if first.is_alphabetic() => {
+//             let mut result = first.to_uppercase().to_string();
+//             result.push_str(chars.as_str());
+//             result
+//         }
+//         _ => s,
+//     }
+// }

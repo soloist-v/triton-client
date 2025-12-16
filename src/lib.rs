@@ -21,6 +21,7 @@ fn triton_client(m: &Bound<'_, PyModule>) -> PyResult<()> {
     if let Err(e) = TOKIO_RT.set(rt) {
         log::error!("TRITON_CLIENT RUNTIME SET ERROR: {:#}", e);
     }
+    m.add("__doc__", "High-performance Triton inference client")?;
     // Add client class
     m.add_class::<Client>()?;
     // Add request/response types

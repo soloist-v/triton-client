@@ -1,21 +1,19 @@
-//! Python 绑定的 Vec 类型包装器
-//!
-//! 提供 `List<T>` 和 `VecRef<T>` 类型，用于在 Python 中更方便地操作 Vec 字段
+//! Python-bound Vec type wrappers provide List<T> types for easier manipulation of Vec fields in Python.
 
 use numpy::{PyArray1, PyArrayMethods, PyReadonlyArray1};
 use pyo3::prelude::*;
 use pyo3::types::PyList;
 use std::ops::{Deref, DerefMut};
 
-/// 可变的列表类型，用于设置 Vec 字段
+/// A mutable list type used to set Vec fields.
 ///
-/// 可以从 Python list、numpy 数组等构造，支持增删改查操作
+/// It can be constructed from Python list, NumPy array, etc., and supports CRUD operations.
 ///
-/// 注意：由于 pyo3 不支持泛型 pyclass，我们为每种类型创建了具体的类型
+/// Note: Since pyo3 does not support generic pyclass, we have created concrete types for each type.
 ///
 macro_rules! define_list_type {
     ($name:ident, $t:ty, $py_array:ty, $py_readonly:ty) => {
-        #[pyclass]
+        #[pyclass(module="triton_client")]
         #[derive(Debug, Clone)]
         pub struct $name {
             inner: Vec<$t>,
@@ -53,7 +51,7 @@ macro_rules! define_list_type {
 
         #[pymethods]
         impl $name {
-            /// 从 Python list 构造
+            /// from Python list construct
             #[new]
             fn new_py(obj: &Bound<'_, PyAny>) -> PyResult<Self> {
                 if let Ok(list) = obj.cast::<PyList>() {
@@ -66,7 +64,7 @@ macro_rules! define_list_type {
                 }
             }
 
-            /// 从 numpy 数组构造（静态方法）
+            /// from numpy array construct
             #[staticmethod]
             fn from_array(arr: $py_readonly) -> PyResult<Self> {
                 Ok(Self {
@@ -74,17 +72,16 @@ macro_rules! define_list_type {
                 })
             }
 
-            /// 添加元素
+            /// push item
             fn append(&mut self, item: $t) {
                 self.inner.push(item);
             }
 
-            /// 获取长度
+            /// len
             fn __len__(&self) -> usize {
                 self.inner.len()
             }
 
-            /// 索引访问
             fn __getitem__(&self, index: usize) -> PyResult<$t> {
                 self.inner
                     .get(index)
@@ -92,7 +89,6 @@ macro_rules! define_list_type {
                     .ok_or_else(|| pyo3::exceptions::PyIndexError::new_err("Index out of range"))
             }
 
-            /// 索引赋值
             fn __setitem__(&mut self, index: usize, value: $t) -> PyResult<()> {
                 if let Some(elem) = self.inner.get_mut(index) {
                     *elem = value;
@@ -104,7 +100,7 @@ macro_rules! define_list_type {
                 }
             }
 
-            /// 删除元素
+            /// remove item
             fn remove(&mut self, index: usize) -> PyResult<$t> {
                 if index < self.inner.len() {
                     Ok(self.inner.remove(index))
@@ -115,7 +111,7 @@ macro_rules! define_list_type {
                 }
             }
 
-            /// 插入元素
+            /// insert item
             fn insert(&mut self, index: usize, value: $t) -> PyResult<()> {
                 if index <= self.inner.len() {
                     self.inner.insert(index, value);
@@ -127,19 +123,29 @@ macro_rules! define_list_type {
                 }
             }
 
-            /// 转换为 Python list
+            /// to Python list
             fn to_list<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyList>> {
                 PyList::new(py, &self.inner)
             }
 
-            /// 转换为 numpy 数组
+            /// to numpy array
             fn to_array<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, $py_array>> {
                 Ok(<$py_array>::from_vec(py, self.inner.clone()))
             }
 
-            /// 清空
+            /// move to numpy array
+            fn into_array<'py>(&mut self, py: Python<'py>) -> PyResult<Bound<'py, $py_array>> {
+                Ok(<$py_array>::from_vec(py, std::mem::take(&mut self.inner)))
+            }
+
+            /// clear items
             fn clear(&mut self) {
                 self.inner.clear();
+            }
+
+            /// deep copy
+            fn copy(&self) ->Self {
+                self.clone()
             }
         }
     };

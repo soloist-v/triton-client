@@ -49,7 +49,7 @@ fn main() -> Result<()> {
         .build_server(true)
         .out_dir("src")
         // 为所有类型添加 pyclass 属性
-        .type_attribute(".", "#[::pyo3::pyclass(get_all, set_all)]")
+        .type_attribute(".", "#[::pyo3::pyclass(get_all, set_all, module = \"triton_client\")]")
         // 为所有类型添加我们的宏（实现带可选参数的构造函数）
         .type_attribute(".", "#[derive(::triton_client_macros::ImplPyNew)]")
         .type_attribute(".", "#[derive(::triton_client_macros::ImplPyVecAccessors)]")

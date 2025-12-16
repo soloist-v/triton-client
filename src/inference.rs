@@ -6,7 +6,7 @@
 /// @@     schedule the inference requests across the different models
 /// @@     and their instances.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -37,7 +37,7 @@ pub mod model_rate_limiter {
     /// @@
     /// @@     The resource property.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -72,7 +72,7 @@ pub mod model_rate_limiter {
 /// @@   A group of one or more instances of a model and resources made
 /// @@   available for those instances.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -166,7 +166,7 @@ pub mod model_instance_group {
     /// @@
     /// @@     A secondary device required for a model instance.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -191,7 +191,7 @@ pub mod model_instance_group {
         /// @@
         /// @@     The kind of the secondary device.
         /// @@
-        #[::pyo3::pyclass(get_all, set_all)]
+        #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
         #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(::triton_client_macros::ImplPyVecAccessors)]
         #[derive(
@@ -238,7 +238,7 @@ pub mod model_instance_group {
     /// @@
     /// @@     Kind of this instance group.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(
@@ -313,7 +313,7 @@ pub mod model_instance_group {
 /// @@
 /// @@   Reshape specification for input and output tensors.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -330,7 +330,7 @@ pub struct ModelTensorReshape {
 /// @@
 /// @@   An input required by the model.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -413,7 +413,7 @@ pub mod model_input {
     /// @@
     /// @@     The format for the input.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(
@@ -481,7 +481,7 @@ pub mod model_input {
 /// @@
 /// @@   An output produced by the model.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -544,7 +544,7 @@ pub struct ModelOutput {
 /// @@     A batch input is an additional input that must be added by
 /// @@     the backend based on all the requests in a batch.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -585,7 +585,7 @@ pub mod batch_input {
     /// @@
     /// @@       The kind of the batch input.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(
@@ -697,7 +697,7 @@ pub mod batch_input {
 /// @@   A batch output is an output produced by the model that must be handled
 /// @@   differently by the backend based on all the requests in a batch.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -730,7 +730,7 @@ pub mod batch_output {
     /// @@
     /// @@     The kind of the batch output.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(
@@ -781,7 +781,7 @@ pub mod batch_output {
 /// @@   Policy indicating which versions of a model should be made
 /// @@   available by the inference server.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -801,7 +801,7 @@ pub mod model_version_policy {
     /// @@     Serve only the latest version(s) of a model. This is
     /// @@     the default policy.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -820,7 +820,7 @@ pub mod model_version_policy {
     /// @@
     /// @@     Serve all versions of the model.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -829,7 +829,7 @@ pub mod model_version_policy {
     /// @@
     /// @@     Serve only specific versions of the model.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -846,7 +846,7 @@ pub mod model_version_policy {
     /// @@     Each model must implement only a single version policy. The
     /// @@     default policy is 'Latest'.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof)]
@@ -878,7 +878,7 @@ pub mod model_version_policy {
 /// @@   model is optimized and prioritized by the backend framework when
 /// @@   it is loaded.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -965,7 +965,7 @@ pub mod model_optimization_policy {
     /// @@     to enabling all optimizations, -1 enables only basic optimizations,
     /// @@     +1 enables only basic and extended optimizations.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -987,7 +987,7 @@ pub mod model_optimization_policy {
     /// @@
     /// @@     CUDA-specific optimization settings.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1036,7 +1036,7 @@ pub mod model_optimization_policy {
         /// @@
         /// @@       Specification of the CUDA graph to be captured.
         /// @@
-        #[::pyo3::pyclass(get_all, set_all)]
+        #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
         #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(::triton_client_macros::ImplPyVecAccessors)]
         #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1081,7 +1081,7 @@ pub mod model_optimization_policy {
             /// @@
             /// @@         Specification of tensor dimension.
             /// @@
-            #[::pyo3::pyclass(get_all, set_all)]
+            #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
             #[derive(::triton_client_macros::ImplPyNew)]
             #[derive(::triton_client_macros::ImplPyVecAccessors)]
             #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -1093,7 +1093,7 @@ pub mod model_optimization_policy {
                 #[prost(int64, repeated, tag = "1")]
                 pub dim: ::prost::alloc::vec::Vec<i64>,
             }
-            #[::pyo3::pyclass(get_all, set_all)]
+            #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
             #[derive(::triton_client_macros::ImplPyNew)]
             #[derive(::triton_client_macros::ImplPyVecAccessors)]
             #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1135,7 +1135,7 @@ pub mod model_optimization_policy {
     /// @@         \<cpu_execution_accelerator>
     /// @@         Default CPU Execution Provider
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1204,7 +1204,7 @@ pub mod model_optimization_policy {
         /// @@     Accelerator with the same name may accept different parameters
         /// @@     depending on the backends.
         /// @@
-        #[::pyo3::pyclass(get_all, set_all)]
+        #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
         #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(::triton_client_macros::ImplPyVecAccessors)]
         #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1239,7 +1239,7 @@ pub mod model_optimization_policy {
     /// @@     memory, and from pinned memory to GPU memory. Similarly, pinned
     /// @@     memory will be used for delivering the outputs.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -1258,7 +1258,7 @@ pub mod model_optimization_policy {
     /// @@     preference over models at lower priorities. Current model
     /// @@     priorities only work for TensorRT models.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(
@@ -1318,7 +1318,7 @@ pub mod model_optimization_policy {
 /// @@
 /// @@   Queue policy for inference requests.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -1367,7 +1367,7 @@ pub mod model_queue_policy {
     /// @@
     /// @@     The action applied to timed-out requests.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(
@@ -1424,7 +1424,7 @@ pub mod model_queue_policy {
 /// @@   Dynamic batching configuration. These settings control how dynamic
 /// @@   batching operates for the model.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1502,7 +1502,7 @@ pub struct ModelDynamicBatching {
 /// @@   Sequence batching configuration. These settings control how sequence
 /// @@   batching operates for the model.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1564,7 +1564,7 @@ pub mod model_sequence_batching {
     /// @@     A control is a signal that the sequence batcher uses to
     /// @@     communicate with a backend.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1619,7 +1619,7 @@ pub mod model_sequence_batching {
         /// @@
         /// @@       The kind of the control.
         /// @@
-        #[::pyo3::pyclass(get_all, set_all)]
+        #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
         #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(::triton_client_macros::ImplPyVecAccessors)]
         #[derive(
@@ -1702,7 +1702,7 @@ pub mod model_sequence_batching {
     /// @@
     /// @@     The sequence control values to communicate by a model input.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1726,7 +1726,7 @@ pub mod model_sequence_batching {
     /// @@
     /// @@     Settings used to initialize data for implicit state.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -1763,7 +1763,7 @@ pub mod model_sequence_batching {
         /// @@
         /// @@         Specify how the initial state data is generated.
         /// @@
-        #[::pyo3::pyclass(get_all, set_all)]
+        #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
         #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(::triton_client_macros::ImplPyVecAccessors)]
         #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof)]
@@ -1791,7 +1791,7 @@ pub mod model_sequence_batching {
     /// @@
     /// @@     An input / output pair of tensors that carry state for the sequence.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1869,7 +1869,7 @@ pub mod model_sequence_batching {
     /// @@     model instance over the lifetime of the sequence. This
     /// @@     is the default strategy.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -1909,7 +1909,7 @@ pub mod model_sequence_batching {
     /// @@     not guaranteed to be assigned to the same batch slot for
     /// @@     all inference requests of that sequence.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -1970,7 +1970,7 @@ pub mod model_sequence_batching {
     /// @@     The strategy used by the sequence batcher. Default strategy
     /// @@     is 'direct'.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -1995,7 +1995,7 @@ pub mod model_sequence_batching {
 /// @@   Model ensembling configuration. These settings specify the models that
 /// @@   compose the ensemble and how data flows between the models.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2015,7 +2015,7 @@ pub mod model_ensembling {
     /// @@     maps ensemble tensor names to the model input tensors,
     /// @@     and maps model output tensors to ensemble tensor names
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2073,7 +2073,7 @@ pub mod model_ensembling {
 /// @@
 /// @@   A model parameter.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -2090,7 +2090,7 @@ pub struct ModelParameter {
 /// @@
 /// @@   Settings used to construct the request sample for model warmup.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2142,7 +2142,7 @@ pub mod model_warmup {
     /// @@
     /// @@     Meta data associated with an input.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -2176,7 +2176,7 @@ pub mod model_warmup {
         /// @@       data type and 'random_data' is set, the data generation will fall
         /// @@       back to 'zero_data'.
         /// @@
-        #[::pyo3::pyclass(get_all, set_all)]
+        #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
         #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(::triton_client_macros::ImplPyVecAccessors)]
         #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof)]
@@ -2218,7 +2218,7 @@ pub mod model_warmup {
 /// @@
 /// @@    The metadata of libraries providing custom operations for this model.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -2237,7 +2237,7 @@ pub struct ModelOperations {
 /// @@    The specification that describes the nature of transactions
 /// @@    to be expected from the model.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -2259,7 +2259,7 @@ pub struct ModelTransactionPolicy {
 /// @@
 /// @@   The repository agents for the model.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2282,7 +2282,7 @@ pub mod model_repository_agents {
     /// @@     A repository agent that should be invoked for the specified
     /// @@     repository actions for this model.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2309,7 +2309,7 @@ pub mod model_repository_agents {
 /// @@
 /// @@   The response cache setting for the model.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -2333,7 +2333,7 @@ pub struct ModelResponseCache {
 /// @@     NOTE: Consider reusing this message body for backend metric custom
 /// @@     configuration.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2353,7 +2353,7 @@ pub mod model_metrics {
     /// @@
     /// @@     Override metrics settings of this model.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2379,7 +2379,7 @@ pub mod model_metrics {
         /// @@
         /// @@     Specify metrics to be overridden with metric_option.
         /// @@
-        #[::pyo3::pyclass(get_all, set_all)]
+        #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
         #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(::triton_client_macros::ImplPyVecAccessors)]
         #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -2398,7 +2398,7 @@ pub mod model_metrics {
         /// @@
         /// @@     Histogram metrics options.
         /// @@
-        #[::pyo3::pyclass(get_all, set_all)]
+        #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
         #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(::triton_client_macros::ImplPyVecAccessors)]
         #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2418,7 +2418,7 @@ pub mod model_metrics {
         /// @@
         /// @@     The value to override the metrics defined in metric_identifier.
         /// @@
-        #[::pyo3::pyclass(get_all, set_all)]
+        #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
         #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(::triton_client_macros::ImplPyVecAccessors)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -2437,7 +2437,7 @@ pub mod model_metrics {
 /// @@
 /// @@   A model configuration.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2636,7 +2636,7 @@ pub mod model_config {
     /// @@     default scheduling policy is used for the model. The default
     /// @@     policy is to execute each inference request independently.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -2679,7 +2679,7 @@ pub mod model_config {
 /// @@
 /// @@   Data types supported for input and output tensors.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -2767,7 +2767,7 @@ impl DataType {
 /// @@
 /// @@   Request message for ServerLive.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -2777,7 +2777,7 @@ pub struct ServerLiveRequest {}
 /// @@
 /// @@   Response message for ServerLive.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -2795,7 +2795,7 @@ pub struct ServerLiveResponse {
 /// @@
 /// @@   Request message for ServerReady.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -2805,7 +2805,7 @@ pub struct ServerReadyRequest {}
 /// @@
 /// @@   Response message for ServerReady.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -2823,7 +2823,7 @@ pub struct ServerReadyResponse {
 /// @@
 /// @@   Request message for ModelReady.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -2848,7 +2848,7 @@ pub struct ModelReadyRequest {
 /// @@
 /// @@   Response message for ModelReady.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -2866,7 +2866,7 @@ pub struct ModelReadyResponse {
 /// @@
 /// @@   Request message for ServerMetadata.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -2876,7 +2876,7 @@ pub struct ServerMetadataRequest {}
 /// @@
 /// @@   Response message for ServerMetadata.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -2908,7 +2908,7 @@ pub struct ServerMetadataResponse {
 /// @@
 /// @@   Request message for ModelMetadata.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -2934,7 +2934,7 @@ pub struct ModelMetadataRequest {
 /// @@
 /// @@   Response message for ModelMetadata.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2982,7 +2982,7 @@ pub mod model_metadata_response {
     /// @@
     /// @@     Metadata for a tensor.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -3016,7 +3016,7 @@ pub mod model_metadata_response {
 /// @@
 /// @@   An inference parameter value.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3044,7 +3044,7 @@ pub mod infer_parameter {
     /// @@           placeholders for future use and
     /// @@           are not supported for custom parameters
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -3090,7 +3090,7 @@ pub mod infer_parameter {
 /// @@   that matches the tensor's data type. Protobuf oneof is not used
 /// @@   because oneofs cannot contain repeated fields.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3175,7 +3175,7 @@ pub struct InferTensorContents {
 /// @@
 /// @@   Request message for ModelInfer.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3260,7 +3260,7 @@ pub mod model_infer_request {
     /// @@
     /// @@     An input tensor for an inference request.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3309,7 +3309,7 @@ pub mod model_infer_request {
     /// @@
     /// @@     An output tensor requested for an inference request.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3337,7 +3337,7 @@ pub mod model_infer_request {
 /// @@
 /// @@   Response message for ModelInfer.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3409,7 +3409,7 @@ pub mod model_infer_response {
     /// @@
     /// @@     An output tensor returned for an inference request.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3459,7 +3459,7 @@ pub mod model_infer_response {
 /// @@
 /// @@   Response message for ModelStreamInfer.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3485,7 +3485,7 @@ pub struct ModelStreamInferResponse {
 /// @@
 /// @@   Request message for ModelConfig.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -3510,7 +3510,7 @@ pub struct ModelConfigRequest {
 /// @@
 /// @@   Response message for ModelConfig.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3528,7 +3528,7 @@ pub struct ModelConfigResponse {
 /// @@
 /// @@   Request message for ModelStatistics.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -3553,7 +3553,7 @@ pub struct ModelStatisticsRequest {
 /// @@
 /// @@   Statistic recording a cumulative duration metric.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -3576,7 +3576,7 @@ pub struct StatisticDuration {
 /// @@
 /// @@   Inference statistics.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -3676,7 +3676,7 @@ pub struct InferStatistics {
 /// @@
 /// @@   Statistics per response.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -3725,7 +3725,7 @@ pub struct InferResponseStatistics {
 /// @@
 /// @@   Inference batch statistics.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -3767,7 +3767,7 @@ pub struct InferBatchStatistics {
 /// @@
 /// @@   Memory usage.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -3797,7 +3797,7 @@ pub struct MemoryUsage {
 /// @@
 /// @@   Statistics for a specific model and version.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3896,7 +3896,7 @@ pub struct ModelStatistics {
 /// @@
 /// @@   Response message for ModelStatistics.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3913,7 +3913,7 @@ pub struct ModelStatisticsResponse {
 /// @@
 /// @@   An model repository parameter value.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -3935,7 +3935,7 @@ pub mod model_repository_parameter {
     /// @@     The parameter value can be a string, an int64 or
     /// @@     a boolean
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof)]
@@ -3971,7 +3971,7 @@ pub mod model_repository_parameter {
 /// @@
 /// @@   Request message for RepositoryIndex.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -3995,7 +3995,7 @@ pub struct RepositoryIndexRequest {
 /// @@
 /// @@   Response message for RepositoryIndex.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4015,7 +4015,7 @@ pub mod repository_index_response {
     /// @@
     /// @@     Index entry for a model.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4054,7 +4054,7 @@ pub mod repository_index_response {
 /// @@
 /// @@   Request message for RepositoryModelLoad.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4087,7 +4087,7 @@ pub struct RepositoryModelLoadRequest {
 /// @@
 /// @@   Response message for RepositoryModelLoad.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4097,7 +4097,7 @@ pub struct RepositoryModelLoadResponse {}
 /// @@
 /// @@   Request message for RepositoryModelUnload.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4130,7 +4130,7 @@ pub struct RepositoryModelUnloadRequest {
 /// @@
 /// @@   Response message for RepositoryModelUnload.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4140,7 +4140,7 @@ pub struct RepositoryModelUnloadResponse {}
 /// @@
 /// @@   Request message for SystemSharedMemoryStatus.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4159,7 +4159,7 @@ pub struct SystemSharedMemoryStatusRequest {
 /// @@
 /// @@   Response message for SystemSharedMemoryStatus.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4183,7 +4183,7 @@ pub mod system_shared_memory_status_response {
     /// @@
     /// @@     Status for a shared memory region.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4222,7 +4222,7 @@ pub mod system_shared_memory_status_response {
 /// @@
 /// @@   Request message for SystemSharedMemoryRegister.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4260,7 +4260,7 @@ pub struct SystemSharedMemoryRegisterRequest {
 /// @@
 /// @@   Response message for SystemSharedMemoryRegister.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4270,7 +4270,7 @@ pub struct SystemSharedMemoryRegisterResponse {}
 /// @@
 /// @@   Request message for SystemSharedMemoryUnregister.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4289,7 +4289,7 @@ pub struct SystemSharedMemoryUnregisterRequest {
 /// @@
 /// @@   Response message for SystemSharedMemoryUnregister.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4299,7 +4299,7 @@ pub struct SystemSharedMemoryUnregisterResponse {}
 /// @@
 /// @@   Request message for CudaSharedMemoryStatus.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4318,7 +4318,7 @@ pub struct CudaSharedMemoryStatusRequest {
 /// @@
 /// @@   Response message for CudaSharedMemoryStatus.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4342,7 +4342,7 @@ pub mod cuda_shared_memory_status_response {
     /// @@
     /// @@     Status for a shared memory region.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4373,7 +4373,7 @@ pub mod cuda_shared_memory_status_response {
 /// @@
 /// @@   Request message for CudaSharedMemoryRegister.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4409,7 +4409,7 @@ pub struct CudaSharedMemoryRegisterRequest {
 /// @@
 /// @@   Response message for CudaSharedMemoryRegister.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4419,7 +4419,7 @@ pub struct CudaSharedMemoryRegisterResponse {}
 /// @@
 /// @@   Request message for CudaSharedMemoryUnregister.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4438,7 +4438,7 @@ pub struct CudaSharedMemoryUnregisterRequest {
 /// @@
 /// @@   Response message for CudaSharedMemoryUnregister.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4448,7 +4448,7 @@ pub struct CudaSharedMemoryUnregisterResponse {}
 /// @@
 /// @@   Request message for TraceSetting.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4481,7 +4481,7 @@ pub mod trace_setting_request {
     /// @@     If no value is provided, the setting will be clear and
     /// @@     the global setting value will be used.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4500,7 +4500,7 @@ pub mod trace_setting_request {
 /// @@
 /// @@   Response message for TraceSetting.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4523,7 +4523,7 @@ pub mod trace_setting_response {
     /// @@
     /// @@     The values to be associated with a trace setting.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4542,7 +4542,7 @@ pub mod trace_setting_response {
 /// @@
 /// @@   Request message for LogSettings.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4559,7 +4559,7 @@ pub struct LogSettingsRequest {
 }
 /// Nested message and enum types in `LogSettingsRequest`.
 pub mod log_settings_request {
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4569,7 +4569,7 @@ pub mod log_settings_request {
     }
     /// Nested message and enum types in `SettingValue`.
     pub mod setting_value {
-        #[::pyo3::pyclass(get_all, set_all)]
+        #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
         #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(::triton_client_macros::ImplPyVecAccessors)]
         #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof)]
@@ -4600,7 +4600,7 @@ pub mod log_settings_request {
 /// @@
 /// @@   Response message for LogSettings.
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4617,7 +4617,7 @@ pub struct LogSettingsResponse {
 }
 /// Nested message and enum types in `LogSettingsResponse`.
 pub mod log_settings_response {
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -4627,7 +4627,7 @@ pub mod log_settings_response {
     }
     /// Nested message and enum types in `SettingValue`.
     pub mod setting_value {
-        #[::pyo3::pyclass(get_all, set_all)]
+        #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
         #[derive(::triton_client_macros::ImplPyNew)]
         #[derive(::triton_client_macros::ImplPyVecAccessors)]
         #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof)]

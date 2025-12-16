@@ -4,7 +4,7 @@
 /// @@
 /// @@   Request message for HealthCheck
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
@@ -17,7 +17,7 @@ pub struct HealthCheckRequest {
 /// @@
 /// @@   Response message for HealthCheck
 /// @@
-#[::pyo3::pyclass(get_all, set_all)]
+#[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
 #[derive(::triton_client_macros::ImplPyNew)]
 #[derive(::triton_client_macros::ImplPyVecAccessors)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -32,7 +32,7 @@ pub mod health_check_response {
     /// @@
     /// @@   Statuses supported by GRPC's health check.
     /// @@
-    #[::pyo3::pyclass(get_all, set_all)]
+    #[::pyo3::pyclass(get_all, set_all, module = "triton_client")]
     #[derive(::triton_client_macros::ImplPyNew)]
     #[derive(::triton_client_macros::ImplPyVecAccessors)]
     #[derive(
