@@ -321,7 +321,7 @@ class ListBool:
     @staticmethod
     def from_array(arr):
         """
-        从 numpy 数组构造（静态方法）
+        from numpy array construct
         """
     def __delitem__(self, key):
         """
@@ -341,27 +341,35 @@ class ListBool:
         """
     def append(self, item):
         """
-        添加元素
+        push item
         """
     def clear(self):
         """
-        清空
+        clear
+        """
+    def copy(self):
+        """
+        copy
         """
     def insert(self, index, value):
         """
-        插入元素
+        insert item
+        """
+    def into_array(self):
+        """
+        move to numpy array
         """
     def remove(self, index):
         """
-        删除元素
+        remove item
         """
     def to_array(self):
         """
-        转换为 numpy 数组
+        to numpy array
         """
     def to_list(self):
         """
-        转换为 Python list
+        to Python list
         """
 class ListF32:
     """
@@ -374,7 +382,7 @@ class ListF32:
     @staticmethod
     def from_array(arr):
         """
-        从 numpy 数组构造（静态方法）
+        from numpy array construct
         """
     def __delitem__(self, key):
         """
@@ -394,27 +402,35 @@ class ListF32:
         """
     def append(self, item):
         """
-        添加元素
+        push item
         """
     def clear(self):
         """
-        清空
+        clear
+        """
+    def copy(self):
+        """
+        copy
         """
     def insert(self, index, value):
         """
-        插入元素
+        insert item
+        """
+    def into_array(self):
+        """
+        move to numpy array
         """
     def remove(self, index):
         """
-        删除元素
+        remove item
         """
     def to_array(self):
         """
-        转换为 numpy 数组
+        to numpy array
         """
     def to_list(self):
         """
-        转换为 Python list
+        to Python list
         """
 class ListF64:
     """
@@ -427,7 +443,7 @@ class ListF64:
     @staticmethod
     def from_array(arr):
         """
-        从 numpy 数组构造（静态方法）
+        from numpy array construct
         """
     def __delitem__(self, key):
         """
@@ -447,27 +463,35 @@ class ListF64:
         """
     def append(self, item):
         """
-        添加元素
+        push item
         """
     def clear(self):
         """
-        清空
+        clear
+        """
+    def copy(self):
+        """
+        copy
         """
     def insert(self, index, value):
         """
-        插入元素
+        insert item
+        """
+    def into_array(self):
+        """
+        move to numpy array
         """
     def remove(self, index):
         """
-        删除元素
+        remove item
         """
     def to_array(self):
         """
-        转换为 numpy 数组
+        to numpy array
         """
     def to_list(self):
         """
-        转换为 Python list
+        to Python list
         """
 class ListI16:
     """
@@ -480,7 +504,7 @@ class ListI16:
     @staticmethod
     def from_array(arr):
         """
-        从 numpy 数组构造（静态方法）
+        from numpy array construct
         """
     def __delitem__(self, key):
         """
@@ -500,27 +524,35 @@ class ListI16:
         """
     def append(self, item):
         """
-        添加元素
+        push item
         """
     def clear(self):
         """
-        清空
+        clear
+        """
+    def copy(self):
+        """
+        copy
         """
     def insert(self, index, value):
         """
-        插入元素
+        insert item
+        """
+    def into_array(self):
+        """
+        move to numpy array
         """
     def remove(self, index):
         """
-        删除元素
+        remove item
         """
     def to_array(self):
         """
-        转换为 numpy 数组
+        to numpy array
         """
     def to_list(self):
         """
-        转换为 Python list
+        to Python list
         """
 class ListI32:
     """
@@ -533,7 +565,7 @@ class ListI32:
     @staticmethod
     def from_array(arr):
         """
-        从 numpy 数组构造（静态方法）
+        from numpy array construct
         """
     def __delitem__(self, key):
         """
@@ -553,27 +585,35 @@ class ListI32:
         """
     def append(self, item):
         """
-        添加元素
+        push item
         """
     def clear(self):
         """
-        清空
+        clear
+        """
+    def copy(self):
+        """
+        copy
         """
     def insert(self, index, value):
         """
-        插入元素
+        insert item
+        """
+    def into_array(self):
+        """
+        move to numpy array
         """
     def remove(self, index):
         """
-        删除元素
+        remove item
         """
     def to_array(self):
         """
-        转换为 numpy 数组
+        to numpy array
         """
     def to_list(self):
         """
-        转换为 Python list
+        to Python list
         """
 class ListI64:
     """
@@ -586,7 +626,7 @@ class ListI64:
     @staticmethod
     def from_array(arr):
         """
-        从 numpy 数组构造（静态方法）
+        from numpy array construct
         """
     def __delitem__(self, key):
         """
@@ -606,27 +646,35 @@ class ListI64:
         """
     def append(self, item):
         """
-        添加元素
+        push item
         """
     def clear(self):
         """
-        清空
+        clear
+        """
+    def copy(self):
+        """
+        copy
         """
     def insert(self, index, value):
         """
-        插入元素
+        insert item
+        """
+    def into_array(self):
+        """
+        move to numpy array
         """
     def remove(self, index):
         """
-        删除元素
+        remove item
         """
     def to_array(self):
         """
-        转换为 numpy 数组
+        to numpy array
         """
     def to_list(self):
         """
-        转换为 Python list
+        to Python list
         """
 class ListI8:
     """
@@ -639,7 +687,7 @@ class ListI8:
     @staticmethod
     def from_array(arr):
         """
-        从 numpy 数组构造（静态方法）
+        from numpy array construct
         """
     def __delitem__(self, key):
         """
@@ -659,27 +707,35 @@ class ListI8:
         """
     def append(self, item):
         """
-        添加元素
+        push item
         """
     def clear(self):
         """
-        清空
+        clear
+        """
+    def copy(self):
+        """
+        copy
         """
     def insert(self, index, value):
         """
-        插入元素
+        insert item
+        """
+    def into_array(self):
+        """
+        move to numpy array
         """
     def remove(self, index):
         """
-        删除元素
+        remove item
         """
     def to_array(self):
         """
-        转换为 numpy 数组
+        to numpy array
         """
     def to_list(self):
         """
-        转换为 Python list
+        to Python list
         """
 class ListU16:
     """
@@ -692,7 +748,7 @@ class ListU16:
     @staticmethod
     def from_array(arr):
         """
-        从 numpy 数组构造（静态方法）
+        from numpy array construct
         """
     def __delitem__(self, key):
         """
@@ -712,27 +768,35 @@ class ListU16:
         """
     def append(self, item):
         """
-        添加元素
+        push item
         """
     def clear(self):
         """
-        清空
+        clear
+        """
+    def copy(self):
+        """
+        copy
         """
     def insert(self, index, value):
         """
-        插入元素
+        insert item
+        """
+    def into_array(self):
+        """
+        move to numpy array
         """
     def remove(self, index):
         """
-        删除元素
+        remove item
         """
     def to_array(self):
         """
-        转换为 numpy 数组
+        to numpy array
         """
     def to_list(self):
         """
-        转换为 Python list
+        to Python list
         """
 class ListU32:
     """
@@ -745,7 +809,7 @@ class ListU32:
     @staticmethod
     def from_array(arr):
         """
-        从 numpy 数组构造（静态方法）
+        from numpy array construct
         """
     def __delitem__(self, key):
         """
@@ -765,27 +829,35 @@ class ListU32:
         """
     def append(self, item):
         """
-        添加元素
+        push item
         """
     def clear(self):
         """
-        清空
+        clear
+        """
+    def copy(self):
+        """
+        copy
         """
     def insert(self, index, value):
         """
-        插入元素
+        insert item
+        """
+    def into_array(self):
+        """
+        move to numpy array
         """
     def remove(self, index):
         """
-        删除元素
+        remove item
         """
     def to_array(self):
         """
-        转换为 numpy 数组
+        to numpy array
         """
     def to_list(self):
         """
-        转换为 Python list
+        to Python list
         """
 class ListU64:
     """
@@ -798,7 +870,7 @@ class ListU64:
     @staticmethod
     def from_array(arr):
         """
-        从 numpy 数组构造（静态方法）
+        from numpy array construct
         """
     def __delitem__(self, key):
         """
@@ -818,27 +890,35 @@ class ListU64:
         """
     def append(self, item):
         """
-        添加元素
+        push item
         """
     def clear(self):
         """
-        清空
+        clear
+        """
+    def copy(self):
+        """
+        copy
         """
     def insert(self, index, value):
         """
-        插入元素
+        insert item
+        """
+    def into_array(self):
+        """
+        move to numpy array
         """
     def remove(self, index):
         """
-        删除元素
+        remove item
         """
     def to_array(self):
         """
-        转换为 numpy 数组
+        to numpy array
         """
     def to_list(self):
         """
-        转换为 Python list
+        to Python list
         """
 class ListU8:
     """
@@ -851,7 +931,7 @@ class ListU8:
     @staticmethod
     def from_array(arr):
         """
-        从 numpy 数组构造（静态方法）
+        from numpy array construct
         """
     def __delitem__(self, key):
         """
@@ -871,27 +951,35 @@ class ListU8:
         """
     def append(self, item):
         """
-        添加元素
+        push item
         """
     def clear(self):
         """
-        清空
+        clear
+        """
+    def copy(self):
+        """
+        copy
         """
     def insert(self, index, value):
         """
-        插入元素
+        insert item
+        """
+    def into_array(self):
+        """
+        move to numpy array
         """
     def remove(self, index):
         """
-        删除元素
+        remove item
         """
     def to_array(self):
         """
-        转换为 numpy 数组
+        to numpy array
         """
     def to_list(self):
         """
-        转换为 Python list
+        to Python list
         """
 class ModelConfig:
     """

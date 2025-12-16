@@ -82,7 +82,7 @@ The wheels will appear under `target/wheels/`.
 
 ---
 
-## Quick start (Python)
+## Quick start
 
 The Rust crate exports its types to Python via the `triton_client` extension module.
 A simple pattern is:
@@ -97,7 +97,8 @@ client = triton_client.Client(url="localhost:8001", access_token=None)
 # Prepare tensor contents
 data = np.random.randn(1, 3, 224, 224).astype(np.float32)
 tensor_contents = triton_client.InferTensorContents()
-tensor_contents.replace_fp32_contents(data.flatten())
+data = triton_client.ListF32.from_array(data)
+tensor_contents.Replace_fp32_contents(data))
 
 # Build input tensor
 input_tensor = triton_client.InferInputTensor(
@@ -126,7 +127,6 @@ request = triton_client.ModelInferRequest(
 
 # Run inference
 response = client.model_infer(request)
-
 # Access outputs (see examples/ for more helpers)
 print("Model infer response id:", response.id)
 ```
